@@ -25,7 +25,7 @@ const DistributionSection = () => {
   }, []);
 
   return (
-    <section ref={ref} id="distribution" className="py-20 bg-zinc-900 relative overflow-hidden">
+    <section ref={ref} id="distribution" className="py-14 md:py-20 bg-zinc-900 relative overflow-hidden">
       <div
         className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]"
       />
@@ -36,27 +36,27 @@ const DistributionSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4">
             Дистрибуция музыки
           </h2>
-          <p className="text-center text-zinc-400 mb-14 text-lg max-w-2xl mx-auto">
+          <p className="text-center text-zinc-400 mb-8 md:mb-14 text-base md:text-lg max-w-2xl mx-auto">
             DIZY MUSIC
           </p>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-zinc-300 leading-relaxed">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="space-y-4 md:space-y-6">
+              <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                 DIZY MUSIC предлагает надёжную и эффективную дистрибуцию треков, позволяя артистам представить свои произведения на крупнейших цифровых платформах, таких как Spotify, Apple Music, Amazon Music и многих других. Наша команда обеспечивает максимально быстрое и беспроблемное размещение музыки, чтобы вы могли сосредоточиться на своём творчестве.
               </p>
-              <p className="text-lg text-zinc-300 leading-relaxed">
+              <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                 Одним из главных преимуществ сотрудничества с DIZY MUSIC является прозрачная схема выплат роялти: мы гарантируем <span className="text-white font-semibold">100% выплату всех доходов</span> от вашей музыки. Это значит, что вы получите именно то, что заслуживаете за свой труд и талант, без скрытых комиссий и дополнительных сборов.
               </p>
-              <p className="text-lg text-zinc-300 leading-relaxed">
+              <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                 Присоединяйтесь к DIZY MUSIC, и дайте своей музыке шанс завоевать мир! Мы поддержим вас на каждом этапе пути, обеспечивая минимальные заботы и максимальные результаты.
               </p>
               <Button
                 size="lg"
-                className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
+                className="bg-white text-black hover:bg-zinc-200 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-full transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                 asChild
               >
                 <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
@@ -66,7 +66,7 @@ const DistributionSection = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               {platforms.map((platform, index) => (
                 <div
                   key={platform.label}

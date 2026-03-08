@@ -34,7 +34,7 @@ const Header = () => {
           <img
             src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/5a627555-b6f6-4f69-81b3-d64887e6ed30.png"
             alt="DIZY MUSIC"
-            className="h-20 w-auto"
+            className="h-12 md:h-20 w-auto"
           />
         </a>
         <div className="md:hidden">
@@ -56,7 +56,7 @@ const Header = () => {
             <li>
               <button
                 onClick={() => scrollToSection("licenses")}
-                className="text-white hover:text-purple-400 transition-colors"
+                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
                 Услуги
               </button>
@@ -64,7 +64,7 @@ const Header = () => {
             <li>
               <button
                 onClick={() => scrollToSection("ghost")}
-                className="text-white hover:text-purple-400 transition-colors"
+                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
                 Ghost Production
               </button>
@@ -72,7 +72,7 @@ const Header = () => {
             <li>
               <button
                 onClick={() => scrollToSection("about")}
-                className="text-white hover:text-purple-400 transition-colors"
+                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
                 О лейбле
               </button>
@@ -80,10 +80,38 @@ const Header = () => {
             <li>
               <button
                 onClick={() => scrollToSection("distribution")}
-                className="text-white hover:text-purple-400 transition-colors"
+                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
                 Дистрибуция
               </button>
+            </li>
+            <li className="md:hidden pt-2 border-t border-white/10 flex items-center gap-4">
+              <a
+                href="https://vk.com/dizymusic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                <Icon name="MessageCircle" size={22} />
+              </a>
+              <a
+                href="https://t.me/dizymusic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                <Icon name="Send" size={22} />
+              </a>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-white/20 text-white hover:bg-white/10"
+                asChild
+              >
+                <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                  Сотрудничество
+                </a>
+              </Button>
             </li>
           </ul>
         </nav>

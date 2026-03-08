@@ -96,17 +96,17 @@ const LicenseSection = () => {
 
       <div className="container mx-auto px-4 relative">
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
+          className={`text-center mb-10 md:mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Наши услуги</h2>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 text-white">Наши услуги</h2>
+          <p className="text-base sm:text-xl text-zinc-400 max-w-2xl mx-auto">
             Выбери формат сотрудничества с DIZY MUSIC и раскрой свой талант на полную мощность
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
           {serviceOptions.map((option, index) => (
             <div
               key={option.name}

@@ -53,7 +53,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" ref={ref} className="py-20 bg-zinc-900 relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-14 md:py-20 bg-zinc-900 relative overflow-hidden">
       <div
         className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]"
         style={{ backgroundPosition: "0 0, 0 0" }}
@@ -64,9 +64,9 @@ const ContactSection = () => {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
         }`}
       >
-        <h2 className="text-5xl font-bold mb-10 text-center text-zinc-200">Присоединиться к DIZY MUSIC</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-10 text-center text-zinc-200">Присоединиться к DIZY MUSIC</h2>
         <div
-          className={`max-w-md mx-auto bg-black/50 backdrop-blur-lg rounded-lg p-8 shadow-2xl border border-white/10 transition-all duration-500 delay-200 ${
+          className={`max-w-md mx-auto bg-black/50 backdrop-blur-lg rounded-lg p-5 sm:p-8 shadow-2xl border border-white/10 transition-all duration-500 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >

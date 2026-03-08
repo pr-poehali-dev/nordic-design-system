@@ -23,34 +23,34 @@ const GhostProductionSection = () => {
   }, []);
 
   return (
-    <section ref={ref} id="ghost" className="py-20 relative overflow-hidden">
+    <section ref={ref} id="ghost" className="py-14 md:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/10 to-black" />
       <div className="container mx-auto px-4 relative">
         <div
           className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
-          <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md p-10 md:p-16 shadow-2xl">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md p-6 sm:p-10 md:p-16 shadow-2xl">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
+                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-4 md:mb-6">
                   <Icon name="Ghost" size={16} className="text-zinc-300" />
                   <span className="text-sm text-zinc-300 font-medium">Ghost Production</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white leading-tight">
                   Твоя музыка —<br />
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
                     наша работа
                   </span>
                 </h2>
-                <p className="text-lg text-zinc-300 mb-6">
+                <p className="text-base md:text-lg text-zinc-300 mb-4 md:mb-6">
                   Идеальное решение для артистов, ищущих профессиональную помощь в создании музыкального контента, не афишируя своё имя. Полный спектр услуг — от написания треков до финального мастеринга.
                 </p>
-                <p className="text-lg text-zinc-300 mb-8">
+                <p className="text-base md:text-lg text-zinc-300 mb-6 md:mb-8">
                   Наши опытные продюсеры работают в различных жанрах и стилях, гарантируя уникальный результат под ваши требования. Сосредоточьтесь на своём искусстве — технические аспекты мы берём на себя.
                 </p>
                 <Button
                   size="lg"
-                  className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
+                  className="bg-white text-black hover:bg-zinc-200 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-full transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                   asChild
                 >
                   <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
@@ -59,20 +59,20 @@ const GhostProductionSection = () => {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {services.map((service, index) => (
                   <div
                     key={service.title}
-                    className={`bg-black/50 rounded-xl p-6 border border-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 ${
+                    className={`bg-black/50 rounded-xl p-4 md:p-6 border border-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300 ${
                       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
                     }`}
                     style={{ transitionDelay: `${index * 100 + 200}ms` }}
                   >
-                    <div className="mb-3 text-white/70">
-                      <Icon name={service.icon} size={28} />
+                    <div className="mb-2 md:mb-3 text-white/70">
+                      <Icon name={service.icon} size={24} />
                     </div>
-                    <h3 className="text-white font-semibold mb-1">{service.title}</h3>
-                    <p className="text-sm text-zinc-400">{service.desc}</p>
+                    <h3 className="text-white font-semibold mb-1 text-sm md:text-base">{service.title}</h3>
+                    <p className="text-xs md:text-sm text-zinc-400">{service.desc}</p>
                   </div>
                 ))}
               </div>
