@@ -1,4 +1,3 @@
-import { Youtube, Instagram, Music2 } from "lucide-react";
 
 const TelegramIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -24,27 +23,7 @@ const Footer = () => {
             >
               <TelegramIcon />
             </a>
-            <a
-              href="#"
-              className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="YouTube"
-            >
-              <Youtube />
-            </a>
-            <a
-              href="#"
-              className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram />
-            </a>
-            <a
-              href="#"
-              className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="BeatStars"
-            >
-              <Music2 />
-            </a>
+
             <a
               href="https://promodj.com/dizymusic"
               target="_blank"
