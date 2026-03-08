@@ -5,7 +5,6 @@ import {
   LicenseSection,
   GhostProductionSection,
   AboutSection,
-  ContactSection,
   Footer,
 } from "@/components/landing";
 
@@ -20,7 +19,6 @@ const Index = () => {
           <LicenseSection />
           <GhostProductionSection />
           <AboutSection />
-          <ContactSection />
         </main>
         <Footer />
       </div>
