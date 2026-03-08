@@ -95,7 +95,7 @@ const DistributionSection = () => {
                   <Icon name="Globe" size={36} />
                 </div>
                 <div>
-                  <div className="text-white font-bold text-2xl">17 платформ</div>
+                  <div className="text-white font-bold text-2xl">50+ платформ</div>
                   <div className="text-zinc-400">Максимальный охват аудитории</div>
                 </div>
               </div>
