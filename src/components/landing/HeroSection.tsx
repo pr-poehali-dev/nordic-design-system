@@ -55,16 +55,18 @@ const HeroSection = () => {
                   className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  asChild
                 >
-                  <span className="relative z-10">Присоединиться к лейблу</span>
-                  <span
-                    className={`ml-2 relative z-10 transition-transform duration-200 ${
-                      isHovered ? "translate-x-1" : ""
-                    }`}
-                  >
-                    &rarr;
-                  </span>
+                  <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                    <span className="relative z-10">Присоединиться к лейблу</span>
+                    <span
+                      className={`ml-2 relative z-10 transition-transform duration-200 ${
+                        isHovered ? "translate-x-1" : ""
+                      }`}
+                    >
+                      &rarr;
+                    </span>
+                  </a>
                 </Button>
               </div>
             </div>

@@ -164,9 +164,11 @@ const LicenseSection = () => {
 
                   <Button
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    asChild
                   >
-                    Обсудить условия
+                    <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                      Обсудить условия
+                    </a>
                   </Button>
                 </CardContent>
               </Card>

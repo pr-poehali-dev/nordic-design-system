@@ -51,9 +51,11 @@ const GhostProductionSection = () => {
                 <Button
                   size="lg"
                   className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  asChild
                 >
-                  Обсудить проект →
+                  <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                    Обсудить проект →
+                  </a>
                 </Button>
               </div>
 
