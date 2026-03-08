@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Icon from "@/components/ui/icon";
@@ -6,6 +6,8 @@ import Icon from "@/components/ui/icon";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,12 +17,23 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
+    setIsServicesOpen(false);
   };
 
   return (
@@ -77,22 +90,61 @@ const Header = () => {
                 Дистрибуция
               </button>
             </li>
-            <li>
+
+            {/* Услуги с дропдауном — desktop */}
+            <li ref={servicesRef} className="hidden md:block relative">
               <button
-                onClick={() => scrollToSection("pitching")}
-                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
-              >
-                Питчинг
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("licenses")}
-                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className="flex items-center gap-1 text-white hover:text-purple-400 transition-colors text-sm"
               >
                 Услуги
+                <Icon name={isServicesOpen ? "ChevronUp" : "ChevronDown"} size={14} />
               </button>
+              {isServicesOpen && (
+                <ul className="absolute top-full left-0 mt-2 w-44 bg-black/95 border border-white/10 rounded-lg overflow-hidden shadow-xl">
+                  <li>
+                    <button
+                      onClick={() => scrollToSection("pitching")}
+                      className="w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
+                    >
+                      Питчинг
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => scrollToSection("licenses")}
+                      className="w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
+                    >
+                      Лицензии
+                    </button>
+                  </li>
+                </ul>
+              )}
             </li>
+
+            {/* Услуги — mobile (раскрытый список) */}
+            <li className="md:hidden">
+              <span className="text-white/50 text-sm uppercase tracking-wider">Услуги</span>
+              <ul className="mt-2 space-y-2 pl-3 border-l border-white/10">
+                <li>
+                  <button
+                    onClick={() => scrollToSection("pitching")}
+                    className="text-white hover:text-purple-400 transition-colors text-base"
+                  >
+                    Питчинг
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("licenses")}
+                    className="text-white hover:text-purple-400 transition-colors text-base"
+                  >
+                    Лицензии
+                  </button>
+                </li>
+              </ul>
+            </li>
+
             <li className="md:hidden pt-2 border-t border-white/10 flex items-center gap-4">
               <a
                 href="https://vk.com/dizymusic"
