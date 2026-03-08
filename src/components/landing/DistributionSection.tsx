@@ -7,13 +7,11 @@ const platforms = [
   { name: "Apple Music", logo: "https://www.vectorlogo.zone/logos/apple/apple-icon.svg" },
   { name: "Amazon Music", logo: "https://www.vectorlogo.zone/logos/amazon/amazon-icon.svg" },
   { name: "YouTube Music", logo: "https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg" },
-  { name: "Deezer", logo: "https://www.vectorlogo.zone/logos/deezer/deezer-icon.svg" },
-  { name: "Tidal", logo: "https://images.tidal.com/images/tidal_logo_white.svg" },
-  { name: "Pandora", logo: "https://www.vectorlogo.zone/logos/pandora/pandora-icon.svg" },
+
   { name: "iTunes", logo: "https://www.vectorlogo.zone/logos/apple/apple-icon.svg" },
   { name: "SoundCloud", logo: "https://www.vectorlogo.zone/logos/soundcloud/soundcloud-icon.svg" },
   { name: "TikTok", logo: "https://www.vectorlogo.zone/logos/tiktok/tiktok-icon.svg" },
-  { name: "Shazam", logo: "https://www.vectorlogo.zone/logos/shazam/shazam-icon.svg" },
+
   { name: "VK Music", logo: "https://www.vectorlogo.zone/logos/vk/vk-icon.svg" },
   { name: "Яндекс Музыка", logo: "https://www.vectorlogo.zone/logos/yandex/yandex-icon.svg" },
 ];
