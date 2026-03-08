@@ -16,9 +16,6 @@ const platforms = [
   { name: "Shazam", logo: "https://www.vectorlogo.zone/logos/shazam/shazam-icon.svg" },
   { name: "VK Music", logo: "https://www.vectorlogo.zone/logos/vk/vk-icon.svg" },
   { name: "Яндекс Музыка", logo: "https://www.vectorlogo.zone/logos/yandex/yandex-icon.svg" },
-  { name: "Звук", logo: null },
-  { name: "Boom", logo: null },
-  { name: "Napster", logo: null },
 ];
 
 // Дублируем для бесшовной анимации
