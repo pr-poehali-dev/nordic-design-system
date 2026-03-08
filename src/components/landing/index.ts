@@ -6,4 +6,5 @@ export { default as AboutSection } from "./AboutSection";
 export { default as DistributionSection } from "./DistributionSection";
 export { default as ContactSection } from "./ContactSection";
 export { default as GhostProductionSection } from "./GhostProductionSection";
+export { default as PitchingSection } from "./PitchingSection";
 export { default as Footer } from "./Footer";

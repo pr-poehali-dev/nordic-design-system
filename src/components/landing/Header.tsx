@@ -79,6 +79,14 @@ const Header = () => {
             </li>
             <li>
               <button
+                onClick={() => scrollToSection("pitching")}
+                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
+              >
+                Питчинг
+              </button>
+            </li>
+            <li>
+              <button
                 onClick={() => scrollToSection("licenses")}
                 className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
