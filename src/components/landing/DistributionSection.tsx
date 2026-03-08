@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import Icon from "@/components/ui/icon";
+import { Button } from "@/components/ui/button";
 
 const platforms = [
   { icon: "Music", label: "Spotify" },
@@ -53,6 +54,16 @@ const DistributionSection = () => {
               <p className="text-lg text-zinc-300 leading-relaxed">
                 Присоединяйтесь к DIZY MUSIC, и дайте своей музыке шанс завоевать мир! Мы поддержим вас на каждом этапе пути, обеспечивая минимальные заботы и максимальные результаты.
               </p>
+              <Button
+                size="lg"
+                className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
+                asChild
+              >
+                <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                  <Icon name="Send" size={20} />
+                  <span className="ml-2">Подключить дистрибуцию</span>
+                </a>
+              </Button>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
