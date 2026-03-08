@@ -57,7 +57,7 @@ const AboutSection = () => {
             <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center">
               <div className="text-center p-8">
                 <img
-                  src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/8532c095-0229-476c-bb22-e74661c54d8a.png"
+                  src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/5a627555-b6f6-4f69-81b3-d64887e6ed30.png"
                   alt="DIZY MUSIC"
                   className="w-full max-w-xs mx-auto"
                 />

@@ -31,7 +31,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/">
           <img
-            src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/8532c095-0229-476c-bb22-e74661c54d8a.png"
+            src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/5a627555-b6f6-4f69-81b3-d64887e6ed30.png"
             alt="DIZY MUSIC"
             className="h-20 w-auto"
           />
