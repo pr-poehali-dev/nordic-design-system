@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from "react";
-import { Headphones, Music, Mic2, Award } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 const achievements = [
-  { icon: <Headphones className="w-6 h-6" />, label: "Лет опыта", value: "10+" },
-  { icon: <Music className="w-6 h-6" />, label: "Созданных треков", value: "500+" },
-  { icon: <Mic2 className="w-6 h-6" />, label: "Коллабораций с артистами", value: "100+" },
-  { icon: <Award className="w-6 h-6" />, label: "Наград", value: "15+" },
+  { icon: "Users", label: "Артистов в команде", value: "50+" },
+  { icon: "Music2", label: "Выпущенных треков", value: "300+" },
+  { icon: "Globe", label: "Платформ дистрибуции", value: "50+" },
+  { icon: "Award", label: "Лет на рынке", value: "5+" },
 ];
 
 const AboutSection = () => {
@@ -57,23 +57,20 @@ const AboutSection = () => {
             <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center">
               <div className="text-center p-8">
                 <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                  <Music className="w-16 h-16 text-white" />
+                  <Icon name="Music2" size={64} className="text-white" />
                 </div>
-                <p className="text-zinc-400 text-lg">Фото продюсера</p>
+                <p className="text-white text-3xl font-bold tracking-widest">DIZY MUSIC</p>
+                <p className="text-zinc-400 text-sm mt-2">Музыкальный лейбл</p>
               </div>
             </div>
           </div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О SoundForge</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О лейбле</h2>
             <p className="text-lg mb-6 text-zinc-300">
-              SoundForge — это не просто битмейкер, это звуковой архитектор, создающий саундскейпы
-              будущего. С десятилетним опытом и чутким слухом на инновации, SoundForge раздвигает
-              границы возможного в музыкальном продакшене.
+              DIZY MUSIC — это динамичный музыкальный лейбл, который предлагает полный спектр услуг для музыкантов и артистов. Мы специализируемся на дистрибуции треков, обеспечивая их доступность на всех крупнейших цифровых платформах.
             </p>
             <p className="text-lg mb-8 text-zinc-300">
-              От хитов в чартах до андеграундных гимнов — универсальный стиль и внимание к деталям
-              гарантируют, что каждый бит — это не просто трек, а путешествие, ждущее правильного
-              артиста.
+              Наша команда опытных профессионалов поддерживает исполнителей на каждом этапе — от написания оригинальных треков и создания ремиксов до продвижения на рынке. С DIZY MUSIC вы получите доступ к ресурсам и инструментам, которые помогут вам достичь новых вершин.
             </p>
             <div className="grid grid-cols-2 gap-6">
               {achievements.map((achievement, index) => (
@@ -85,7 +82,9 @@ const AboutSection = () => {
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-center mb-2">
-                    <div className="mr-2 text-white">{achievement.icon}</div>
+                    <div className="mr-2 text-white">
+                      <Icon name={achievement.icon} size={24} />
+                    </div>
                     <div className="text-2xl font-bold text-white">{achievement.value}</div>
                   </div>
                   <div className="text-sm text-zinc-400">{achievement.label}</div>

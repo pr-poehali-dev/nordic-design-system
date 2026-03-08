@@ -1,71 +1,69 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, X, Crown, Zap, Star, Globe } from "lucide-react";
+import { Check, Crown, Zap, Star, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface LicenseOption {
+interface ServiceOption {
   name: string;
   price: string;
   icon: React.ReactNode;
   features: string[];
-  notIncluded?: string[];
-  bulkDeal?: string;
   popular?: boolean;
+  badge?: string;
 }
 
-const licenseOptions: LicenseOption[] = [
+const serviceOptions: ServiceOption[] = [
   {
-    name: "Стандартная лицензия",
-    price: "299 руб",
+    name: "Старт",
+    price: "Базовый",
     icon: <Star className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 5 000 копий",
-      "75 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (2 станции)",
+      "Дистрибуция на 10+ платформах",
+      "Регистрация авторских прав",
+      "Базовое продвижение в соцсетях",
+      "Персональный менеджер",
+      "Ежемесячная отчётность",
     ],
-    bulkDeal: "КУПИ 1 ТРЕК — ПОЛУЧИ 1 В ПОДАРОК!",
+    badge: "ИДЕАЛЬНО ДЛЯ НАЧАЛА КАРЬЕРЫ!",
   },
   {
-    name: "Продвинутая лицензия",
-    price: "499 руб",
+    name: "Развитие",
+    price: "Стандарт",
     icon: <Zap className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 10 000 копий",
-      "150 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Дистрибуция на 30+ платформах",
+      "Регистрация авторских прав",
+      "Активное продвижение в соцсетях",
+      "Создание ремиксов",
+      "PR и медиа-продвижение",
+      "Еженедельная отчётность",
     ],
     popular: true,
   },
   {
-    name: "Премиум лицензия",
-    price: "799 руб",
+    name: "Профи",
+    price: "Премиум",
     icon: <Crown className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 20 000 копий",
-      "500 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Только некоммерческие выступления",
+      "Дистрибуция на 50+ платформах",
+      "Полное юридическое сопровождение",
+      "Продвижение на радио и в СМИ",
+      "Организация живых выступлений",
+      "Разработка артист-бренда",
+      "Поддержка 24/7",
     ],
-    notIncluded: ["Без прав на радиотрансляцию"],
   },
   {
-    name: "Коммерческая лицензия",
-    price: "899 руб",
+    name: "Лейбл",
+    price: "Эксклюзив",
     icon: <Globe className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Неограниченное распространение",
-      "Неограниченные онлайн-прослушивания",
-      "Неограниченное количество клипов",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Полное управление карьерой",
+      "Международная дистрибуция",
+      "Синхронизация (кино, реклама, ТВ)",
+      "Персональная PR-команда",
+      "Выпуск альбомов и EP",
+      "Партнёрства с мировыми лейблами",
     ],
   },
 ];
@@ -102,15 +100,14 @@ const LicenseSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свою лицензию</h2>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Наши услуги</h2>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Подбери идеальную лицензию под свои потребности и начни создавать потрясающую музыку уже
-            сегодня
+            Выбери формат сотрудничества с DIZY MUSIC и раскрой свой талант на полную мощность
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {licenseOptions.map((option, index) => (
+          {serviceOptions.map((option, index) => (
             <div
               key={option.name}
               className={`transition-all duration-500 ${
@@ -143,7 +140,7 @@ const LicenseSection = () => {
                       {option.icon}
                     </div>
                     <h3 className="text-xl font-bold mb-2 text-white">{option.name}</h3>
-                    <div className="text-3xl font-bold text-white">{option.price}</div>
+                    <div className="text-xl font-semibold text-zinc-300">{option.price}</div>
                   </div>
 
                   <div className="flex-grow">
@@ -154,30 +151,22 @@ const LicenseSection = () => {
                           <span className="text-sm text-zinc-300">{feature}</span>
                         </li>
                       ))}
-                      {option.notIncluded?.map((feature, i) => (
-                        <li key={i} className="flex items-start text-zinc-500">
-                          <X className="h-5 w-5 text-zinc-500 mr-2 shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
                     </ul>
                   </div>
 
-                  {option.bulkDeal && (
+                  {option.badge && (
                     <div className="mb-4">
-                      <p className="text-sm font-semibold text-white bg-white/5 py-2 px-3 rounded-lg border border-white/10 animate-pulse">
-                        {option.bulkDeal}
+                      <p className="text-sm font-semibold text-white bg-white/5 py-2 px-3 rounded-lg border border-white/10 animate-pulse text-center">
+                        {option.badge}
                       </p>
                     </div>
                   )}
 
                   <Button
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
-                    asChild
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      Выбрать
-                    </a>
+                    Обсудить условия
                   </Button>
                 </CardContent>
               </Card>
