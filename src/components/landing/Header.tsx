@@ -33,7 +33,7 @@ const Header = () => {
           <img
             src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/575b789a-36e4-4d9b-93b3-2b0f16cb7f95.png"
             alt="DIZY MUSIC"
-            className="h-12 w-auto"
+            className="h-20 w-auto"
           />
         </a>
         <div className="md:hidden">
