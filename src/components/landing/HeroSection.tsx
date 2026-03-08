@@ -38,33 +38,35 @@ const HeroSection = () => {
         style={{ transform: `translateY(${scrollY}px)`, opacity: scrollOpacity }}
         className="relative pt-40 pb-16 px-4 transition-opacity duration-100 flex items-center min-h-screen"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight relative">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
-                DIZY MUSIC
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-zinc-400 max-w-3xl mx-auto">
-              Музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на всех крупнейших платформах, поддержка на каждом этапе карьеры и индивидуальный подход к каждому исполнителю.
-            </p>
-            <div className="relative inline-block">
-              <Button
-                size="lg"
-                className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <span className="relative z-10">Присоединиться к лейблу</span>
-                <span
-                  className={`ml-2 relative z-10 transition-transform duration-200 ${
-                    isHovered ? "translate-x-1" : ""
-                  }`}
-                >
-                  &rarr;
+        <div className="max-w-5xl mx-auto w-full">
+          <div className="animate-fade-in rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md p-10 md:p-16 shadow-2xl mb-10">
+            <div className="text-center">
+              <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight relative">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
+                  DIZY MUSIC
                 </span>
-              </Button>
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 text-zinc-400 max-w-3xl mx-auto">
+                Музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на всех крупнейших платформах, поддержка на каждом этапе карьеры и индивидуальный подход к каждому исполнителю.
+              </p>
+              <div className="relative inline-block">
+                <Button
+                  size="lg"
+                  className="bg-white text-black hover:bg-zinc-200 text-lg px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <span className="relative z-10">Присоединиться к лейблу</span>
+                  <span
+                    className={`ml-2 relative z-10 transition-transform duration-200 ${
+                      isHovered ? "translate-x-1" : ""
+                    }`}
+                  >
+                    &rarr;
+                  </span>
+                </Button>
+              </div>
             </div>
           </div>
 
