@@ -62,6 +62,14 @@ const Header = () => {
             </li>
             <li>
               <button
+                onClick={() => scrollToSection("ghost")}
+                className="text-white hover:text-purple-400 transition-colors"
+              >
+                Ghost Production
+              </button>
+            </li>
+            <li>
+              <button
                 onClick={() => scrollToSection("about")}
                 className="text-white hover:text-purple-400 transition-colors"
               >
