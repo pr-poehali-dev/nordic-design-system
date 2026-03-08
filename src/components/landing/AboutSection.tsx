@@ -56,11 +56,12 @@ const AboutSection = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/0 rounded-3xl transform -rotate-6"></div>
             <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center">
               <div className="text-center p-8">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                  <Icon name="Music2" size={64} className="text-white" />
-                </div>
-                <p className="text-white text-3xl font-bold tracking-widest">DIZY MUSIC</p>
-                <p className="text-zinc-400 text-sm mt-2">Музыкальный лейбл</p>
+                <img
+                  src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/8532c095-0229-476c-bb22-e74661c54d8a.png"
+                  alt="DIZY MUSIC"
+                  className="w-full max-w-xs mx-auto"
+                />
+                <p className="text-zinc-400 text-sm mt-4">Музыкальный лейбл</p>
               </div>
             </div>
           </div>
