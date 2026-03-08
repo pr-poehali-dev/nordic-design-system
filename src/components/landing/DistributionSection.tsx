@@ -3,22 +3,22 @@ import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 
 const platforms = [
-  { name: "Spotify", logo: "https://cdn.simpleicons.org/spotify/1DB954" },
-  { name: "Apple Music", logo: "https://cdn.simpleicons.org/applemusic/FA243C" },
-  { name: "Amazon Music", logo: "https://cdn.simpleicons.org/amazonmusic/00A8E0" },
-  { name: "YouTube Music", logo: "https://cdn.simpleicons.org/youtubemusic/FF0000" },
-  { name: "Deezer", logo: "https://cdn.simpleicons.org/deezer/FF0092" },
-  { name: "Tidal", logo: "https://cdn.simpleicons.org/tidal/ffffff" },
-  { name: "Pandora", logo: "https://cdn.simpleicons.org/pandora/3668FF" },
-  { name: "iTunes", logo: "https://cdn.simpleicons.org/itunes/FB5BC5" },
-  { name: "SoundCloud", logo: "https://cdn.simpleicons.org/soundcloud/FF5500" },
-  { name: "TikTok", logo: "https://cdn.simpleicons.org/tiktok/ffffff" },
-  { name: "Shazam", logo: "https://cdn.simpleicons.org/shazam/0088FF" },
-  { name: "VK Music", logo: "https://cdn.simpleicons.org/vk/4680C2" },
-  { name: "Яндекс Музыка", logo: "https://cdn.simpleicons.org/yandex/FF0000" },
+  { name: "Spotify", logo: "https://www.vectorlogo.zone/logos/spotify/spotify-icon.svg" },
+  { name: "Apple Music", logo: "https://www.vectorlogo.zone/logos/apple/apple-icon.svg" },
+  { name: "Amazon Music", logo: "https://www.vectorlogo.zone/logos/amazon/amazon-icon.svg" },
+  { name: "YouTube Music", logo: "https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg" },
+  { name: "Deezer", logo: "https://www.vectorlogo.zone/logos/deezer/deezer-icon.svg" },
+  { name: "Tidal", logo: "https://images.tidal.com/images/tidal_logo_white.svg" },
+  { name: "Pandora", logo: "https://www.vectorlogo.zone/logos/pandora/pandora-icon.svg" },
+  { name: "iTunes", logo: "https://www.vectorlogo.zone/logos/apple/apple-icon.svg" },
+  { name: "SoundCloud", logo: "https://www.vectorlogo.zone/logos/soundcloud/soundcloud-icon.svg" },
+  { name: "TikTok", logo: "https://www.vectorlogo.zone/logos/tiktok/tiktok-icon.svg" },
+  { name: "Shazam", logo: "https://www.vectorlogo.zone/logos/shazam/shazam-icon.svg" },
+  { name: "VK Music", logo: "https://www.vectorlogo.zone/logos/vk/vk-icon.svg" },
+  { name: "Яндекс Музыка", logo: "https://www.vectorlogo.zone/logos/yandex/yandex-icon.svg" },
   { name: "Звук", logo: null },
   { name: "Boom", logo: null },
-  { name: "Napster", logo: "https://cdn.simpleicons.org/napster/ffffff" },
+  { name: "Napster", logo: null },
 ];
 
 // Дублируем для бесшовной анимации
@@ -137,10 +137,17 @@ const DistributionSection = () => {
                     alt={platform.name}
                     className="w-8 h-8 object-contain"
                     loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                    }}
                   />
-                ) : (
-                  <Icon name="Music" size={32} className="text-white/60" />
-                )}
+                ) : null}
+                <Icon
+                  name="Music"
+                  size={32}
+                  className={`text-white/60 ${platform.logo ? "hidden" : ""}`}
+                />
                 <span className="text-zinc-400 text-xs font-medium text-center whitespace-nowrap">
                   {platform.name}
                 </span>
