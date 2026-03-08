@@ -55,14 +55,6 @@ const Header = () => {
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 p-4 md:p-0">
             <li>
               <button
-                onClick={() => scrollToSection("licenses")}
-                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
-              >
-                Услуги
-              </button>
-            </li>
-            <li>
-              <button
                 onClick={() => scrollToSection("ghost")}
                 className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
@@ -83,6 +75,14 @@ const Header = () => {
                 className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
               >
                 Дистрибуция
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("licenses")}
+                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
+              >
+                Услуги
               </button>
             </li>
             <li className="md:hidden pt-2 border-t border-white/10 flex items-center gap-4">
