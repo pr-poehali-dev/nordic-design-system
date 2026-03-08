@@ -67,7 +67,7 @@ const FeaturesSection = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
               Наши возможности
             </h2>
-            <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
+            <p className="text-zinc-400 text-base md:text-lg whitespace-nowrap">
               Всё необходимое для роста вашей музыкальной карьеры в одном месте
             </p>
           </div>
