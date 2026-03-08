@@ -45,6 +45,15 @@ const Footer = () => {
             >
               <Music2 />
             </a>
+            <a
+              href="https://promodj.com/dizymusic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-white transition-colors text-sm font-medium"
+              aria-label="PromoDJ"
+            >
+              PromoDJ
+            </a>
           </div>
         </div>
       </div>
