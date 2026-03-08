@@ -3,6 +3,7 @@ import {
   Header,
   HeroSection,
   LicenseSection,
+  GhostProductionSection,
   AboutSection,
   ContactSection,
   Footer,
@@ -17,6 +18,7 @@ const Index = () => {
         <main>
           <HeroSection />
           <LicenseSection />
+          <GhostProductionSection />
           <AboutSection />
           <ContactSection />
         </main>
