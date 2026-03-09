@@ -177,7 +177,7 @@ const Header = () => {
                 className="bg-purple-600 hover:bg-purple-700 text-white"
                 asChild
               >
-                <a href="https://t.me/+QgiLIa1gFRY4Y2Iy" target="_blank" rel="noopener noreferrer">
+                <a href="https://t.me/dizymusicchat" target="_blank" rel="noopener noreferrer">
                   Поддержка
                 </a>
               </Button>
@@ -214,7 +214,7 @@ const Header = () => {
             className="bg-purple-600 hover:bg-purple-700 text-white"
             asChild
           >
-            <a href="https://t.me/+QgiLIa1gFRY4Y2Iy" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/dizymusicchat" target="_blank" rel="noopener noreferrer">
               Поддержка
             </a>
           </Button>
