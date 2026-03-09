@@ -172,6 +172,15 @@ const Header = () => {
                   Сотрудничество
                 </a>
               </Button>
+              <Button
+                size="sm"
+                className="bg-purple-600 hover:bg-purple-700 text-white"
+                asChild
+              >
+                <a href="https://t.me/+QgiLIa1gFRY4Y2Iy" target="_blank" rel="noopener noreferrer">
+                  Поддержка
+                </a>
+              </Button>
             </li>
           </ul>
         </nav>
@@ -199,6 +208,14 @@ const Header = () => {
           >
             <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
               Сотрудничество
+            </a>
+          </Button>
+          <Button
+            className="bg-purple-600 hover:bg-purple-700 text-white"
+            asChild
+          >
+            <a href="https://t.me/+QgiLIa1gFRY4Y2Iy" target="_blank" rel="noopener noreferrer">
+              Поддержка
             </a>
           </Button>
         </div>
