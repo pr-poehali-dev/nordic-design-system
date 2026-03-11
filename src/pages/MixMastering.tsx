@@ -104,43 +104,45 @@ const MixMastering = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-black to-black" />
             <div className="container mx-auto px-4 relative">
               <div
-                className={`max-w-3xl mx-auto text-center transition-all duration-700 ${
+                className={`max-w-3xl mx-auto transition-all duration-700 ${
                   hero.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
               >
-                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
-                  <Icon name="Sliders" size={16} className="text-purple-400" />
-                  <span className="text-sm text-zinc-300 font-medium">Профессиональный звук</span>
-                </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                  Сведение и<br />
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-white">
-                    мастеринг треков
-                  </span>
-                </h1>
-                <p className="text-lg md:text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
-                  Превращаем твой материал в профессиональный трек, готовый к релизу на всех платформах. Опытные инженеры, современное оборудование, результат — как у лучших.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    className="bg-white text-black hover:bg-zinc-200 text-base px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
-                    asChild
-                  >
-                    <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
-                      Заказать сведение →
-                    </a>
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white/20 text-white hover:bg-white/10 text-base px-8 py-6 rounded-full"
-                    asChild
-                  >
-                    <a href="https://t.me/dizymusicchat" target="_blank" rel="noopener noreferrer">
-                      Задать вопрос
-                    </a>
-                  </Button>
+                <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md p-6 sm:p-10 md:p-16 shadow-2xl text-center">
+                  <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
+                    <Icon name="Sliders" size={16} className="text-purple-400" />
+                    <span className="text-sm text-zinc-300 font-medium">Профессиональный звук</span>
+                  </div>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    Сведение и<br />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-white">
+                      мастеринг треков
+                    </span>
+                  </h1>
+                  <p className="text-lg md:text-xl text-zinc-300 mb-8 max-w-2xl mx-auto">
+                    Превращаем твой материал в профессиональный трек, готовый к релизу на всех платформах. Опытные инженеры, современное оборудование, результат — как у лучших.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button
+                      size="lg"
+                      className="bg-white text-black hover:bg-zinc-200 text-base px-8 py-6 rounded-full transition-all duration-300 hover:scale-105"
+                      asChild
+                    >
+                      <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                        Заказать сведение →
+                      </a>
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-white/20 text-white hover:bg-white/10 text-base px-8 py-6 rounded-full"
+                      asChild
+                    >
+                      <a href="https://t.me/dizymusicchat" target="_blank" rel="noopener noreferrer">
+                        Задать вопрос
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
