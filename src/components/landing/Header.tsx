@@ -101,7 +101,7 @@ const Header = () => {
                 <Icon name={isServicesOpen ? "ChevronUp" : "ChevronDown"} size={14} />
               </button>
               {isServicesOpen && (
-                <ul className="absolute top-full left-0 mt-2 w-44 bg-black/95 border border-white/10 rounded-lg overflow-hidden shadow-xl">
+                <ul className="absolute top-full left-0 mt-2 w-52 bg-black/95 border border-white/10 rounded-lg overflow-hidden shadow-xl">
                   <li>
                     <button
                       onClick={() => scrollToSection("pitching")}
@@ -117,6 +117,15 @@ const Header = () => {
                     >
                       Лицензии
                     </button>
+                  </li>
+                  <li>
+                    <a
+                      href="/mix-mastering"
+                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Сведение и мастеринг
+                    </a>
                   </li>
                 </ul>
               )}
@@ -141,6 +150,14 @@ const Header = () => {
                   >
                     Лицензии
                   </button>
+                </li>
+                <li>
+                  <a
+                    href="/mix-mastering"
+                    className="text-white hover:text-purple-400 transition-colors text-base"
+                  >
+                    Сведение и мастеринг
+                  </a>
                 </li>
               </ul>
             </li>
