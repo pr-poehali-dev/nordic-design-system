@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import MixMastering from "./pages/MixMastering";
 import Remixes from "./pages/Remixes";
 import CustomTracks from "./pages/CustomTracks";
+import Covers from "./pages/Covers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/mix-mastering" element={<MixMastering />} />
           <Route path="/remixes" element={<Remixes />} />
           <Route path="/custom-tracks" element={<CustomTracks />} />
+          <Route path="/covers" element={<Covers />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
