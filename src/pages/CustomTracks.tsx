@@ -96,20 +96,10 @@ const CustomTracks = () => {
   }, []);
 
   const hero = useVisible(0.1);
-  const demos = useVisible(0.1);
   const services = useVisible(0.1);
   const useCasesSection = useVisible(0.1);
   const process = useVisible(0.1);
   const genresSection = useVisible(0.1);
-
-  const demoTracks = [
-    "//promodj.com/embed/7873918/cover",
-    "//promodj.com/embed/7873917/cover",
-    "//promodj.com/embed/7873916/cover",
-    "//promodj.com/embed/7873915/cover",
-    "//promodj.com/embed/7873913/cover",
-    "//promodj.com/embed/7873903/cover",
-  ];
 
   return (
     <div className="min-h-screen text-white relative bg-black">
@@ -166,43 +156,6 @@ const CustomTracks = () => {
                     </Button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Демо-треки */}
-          <section ref={demos.ref} className="py-16 md:py-24">
-            <div className="container mx-auto px-4">
-              <div
-                className={`text-center mb-12 transition-all duration-700 ${
-                  demos.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-              >
-                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-4">
-                  <Icon name="PlayCircle" size={16} className="text-amber-400" />
-                  <span className="text-sm text-zinc-300 font-medium">Примеры работ</span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-bold mb-4">Послушай наши треки</h2>
-                <p className="text-zinc-400 max-w-xl mx-auto">Реальные работы, написанные нашими продюсерами</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                {demoTracks.map((src, i) => (
-                  <div
-                    key={i}
-                    className={`rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/40 transition-all duration-700`}
-                    style={{ transitionDelay: `${i * 80}ms`, opacity: demos.isVisible ? 1 : 0, transform: demos.isVisible ? "translateY(0)" : "translateY(24px)" }}
-                  >
-                    <iframe
-                      src={src}
-                      width="100%"
-                      height="300"
-                      frameBorder="0"
-                      allowFullScreen
-                      title={`Demo track ${i + 1}`}
-                      style={{ display: "block" }}
-                    />
-                  </div>
-                ))}
               </div>
             </div>
           </section>
