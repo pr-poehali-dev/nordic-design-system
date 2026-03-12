@@ -132,6 +132,15 @@ const Header = () => {
                       Сведение и мастеринг
                     </a>
                   </li>
+                  <li>
+                    <a
+                      href="/remixes"
+                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Ремиксы на заказ
+                    </a>
+                  </li>
                 </ul>
               )}
             </li>
@@ -162,6 +171,14 @@ const Header = () => {
                     className="text-white hover:text-purple-400 transition-colors text-base"
                   >
                     Сведение и мастеринг
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/remixes"
+                    className="text-white hover:text-purple-400 transition-colors text-base"
+                  >
+                    Ремиксы на заказ
                   </a>
                 </li>
               </ul>
