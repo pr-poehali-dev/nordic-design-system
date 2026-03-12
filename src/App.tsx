@@ -9,6 +9,7 @@ import MixMastering from "./pages/MixMastering";
 import Remixes from "./pages/Remixes";
 import CustomTracks from "./pages/CustomTracks";
 import Covers from "./pages/Covers";
+import Promotion from "./pages/Promotion";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/remixes" element={<Remixes />} />
           <Route path="/custom-tracks" element={<CustomTracks />} />
           <Route path="/covers" element={<Covers />} />
+          <Route path="/promotion" element={<Promotion />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
