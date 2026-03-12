@@ -9,10 +9,10 @@ const Header = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLLIElement>(null);
 
+  const isHome = window.location.pathname === "/";
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -27,14 +27,38 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const navLink = (id: string) => isHome ? undefined : `/#${id}`;
+
+  const handleNavClick = (id: string) => {
     setIsMenuOpen(false);
     setIsServicesOpen(false);
+    if (isHome) {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/#${id}`;
+    }
   };
+
+  const NavItem = ({ id, label }: { id: string; label: string }) => (
+    <li>
+      {isHome ? (
+        <button
+          onClick={() => handleNavClick(id)}
+          className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
+        >
+          {label}
+        </button>
+      ) : (
+        <a
+          href={`/#${id}`}
+          className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
+        >
+          {label}
+        </a>
+      )}
+    </li>
+  );
 
   return (
     <header
@@ -50,6 +74,7 @@ const Header = () => {
             className="h-12 md:h-20 w-auto"
           />
         </a>
+
         <div className="md:hidden">
           <Button
             variant="ghost"
@@ -60,38 +85,18 @@ const Header = () => {
             {isMenuOpen ? <X /> : <Menu />}
           </Button>
         </div>
+
         <nav
           className={`${
             isMenuOpen ? "flex" : "hidden"
           } md:flex absolute md:relative top-full left-0 w-full md:w-auto bg-black/95 md:bg-transparent flex-col md:flex-row`}
         >
           <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 p-4 md:p-0">
-            <li>
-              <button
-                onClick={() => scrollToSection("ghost")}
-                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
-              >
-                Ghost Production
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
-              >
-                О лейбле
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("distribution")}
-                className="text-white hover:text-purple-400 transition-colors text-base md:text-sm"
-              >
-                Дистрибуция
-              </button>
-            </li>
+            <NavItem id="ghost" label="Ghost Production" />
+            <NavItem id="about" label="О лейбле" />
+            <NavItem id="distribution" label="Дистрибуция" />
 
-            {/* Услуги с дропдауном — desktop */}
+            {/* Услуги dropdown — desktop */}
             <li ref={servicesRef} className="hidden md:block relative">
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
@@ -104,7 +109,7 @@ const Header = () => {
                 <ul className="absolute top-full left-0 mt-2 w-52 bg-black/95 border border-white/10 rounded-lg overflow-hidden shadow-xl">
                   <li>
                     <button
-                      onClick={() => scrollToSection("pitching")}
+                      onClick={() => handleNavClick("pitching")}
                       className="w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
                     >
                       Питчинг
@@ -112,7 +117,7 @@ const Header = () => {
                   </li>
                   <li>
                     <button
-                      onClick={() => scrollToSection("licenses")}
+                      onClick={() => handleNavClick("licenses")}
                       className="w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
                     >
                       Лицензии
@@ -131,13 +136,13 @@ const Header = () => {
               )}
             </li>
 
-            {/* Услуги — mobile (раскрытый список) */}
+            {/* Услуги — mobile */}
             <li className="md:hidden">
               <span className="text-white/50 text-sm uppercase tracking-wider">Услуги</span>
               <ul className="mt-2 space-y-2 pl-3 border-l border-white/10">
                 <li>
                   <button
-                    onClick={() => scrollToSection("pitching")}
+                    onClick={() => handleNavClick("pitching")}
                     className="text-white hover:text-purple-400 transition-colors text-base"
                   >
                     Питчинг
@@ -145,7 +150,7 @@ const Header = () => {
                 </li>
                 <li>
                   <button
-                    onClick={() => scrollToSection("licenses")}
+                    onClick={() => handleNavClick("licenses")}
                     className="text-white hover:text-purple-400 transition-colors text-base"
                   >
                     Лицензии
@@ -201,6 +206,7 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+
         <div className="hidden md:flex items-center gap-3">
           <a
             href="https://vk.com/dizymusic"
@@ -228,6 +234,7 @@ const Header = () => {
             </a>
           </Button>
           <Button
+            size="sm"
             className="bg-purple-600 hover:bg-purple-700 text-white"
             asChild
           >
