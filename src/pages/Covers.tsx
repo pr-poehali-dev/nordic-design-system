@@ -100,6 +100,7 @@ const Covers = () => {
   }, []);
 
   const hero = useVisible(0.1);
+  const portfolio = useVisible(0.1);
   const packages = useVisible(0.1);
   const platformsSection = useVisible(0.1);
   const requirementsSection = useVisible(0.1);
@@ -160,6 +161,47 @@ const Covers = () => {
                     </Button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Портфолио */}
+          <section ref={portfolio.ref} className="py-16 md:py-24">
+            <div className="container mx-auto px-4">
+              <div
+                className={`text-center mb-12 transition-all duration-700 ${
+                  portfolio.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                }`}
+              >
+                <h2 className="text-3xl sm:text-4xl font-bold mb-4">Наши работы</h2>
+                <p className="text-zinc-400 max-w-xl mx-auto">Обложки, созданные для артистов лейбла DIZY MUSIC</p>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-5xl mx-auto">
+                {[
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/762335a6-ce0f-4cb8-8385-2b21cbfa8674.jpg", artist: "DEMINA", title: "Среди глубин" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/8accddd5-0fe7-415c-8eb8-5bec55ae1092.jpg", artist: "Adventure Club × Dion Timmer", title: "Need Your Heart 2.0" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/200f0c3f-82e5-4673-a0dd-389a94349077.jpg", artist: "Диман Брюханов", title: "Фарами" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/3ba37289-5049-4d9a-9a72-ac585ffab51b.jpg", artist: "The Midnight", title: "Crystalline" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/1f50208b-ee19-4e81-8279-8235d132bded.jpg", artist: "Arst One × A$", title: "Дымом в облака" },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className={`group relative aspect-square rounded-xl overflow-hidden transition-all duration-700 ${
+                      portfolio.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    }`}
+                    style={{ transitionDelay: `${i * 80}ms` }}
+                  >
+                    <img
+                      src={item.url}
+                      alt={`${item.artist} — ${item.title}`}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+                      <p className="text-white font-semibold text-xs leading-tight">{item.artist}</p>
+                      <p className="text-zinc-300 text-xs">{item.title}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
