@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import MixMastering from "./pages/MixMastering";
 import Remixes from "./pages/Remixes";
+import CustomTracks from "./pages/CustomTracks";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/mix-mastering" element={<MixMastering />} />
           <Route path="/remixes" element={<Remixes />} />
+          <Route path="/custom-tracks" element={<CustomTracks />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
