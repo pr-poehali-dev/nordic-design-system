@@ -88,6 +88,20 @@ const platforms = [
       { name: "Комплексная кампания", price: "от 10 000 ₽" },
     ],
   },
+  {
+    icon: "Smartphone",
+    name: "МТС Музыка",
+    color: "from-rose-600/20 to-rose-900/10",
+    border: "border-rose-500/30",
+    accent: "text-rose-400",
+    badge: "bg-rose-500/20 text-rose-300",
+    desc: "Продвижение в одном из крупнейших российских стриминговых сервисов. Попадание в редакционные подборки и рост аудитории абонентов МТС.",
+    services: [
+      { name: "Продвижение трека в МТС Музыке", price: "от 3 500 ₽" },
+      { name: "Работа с редакционными плейлистами", price: "от 4 000 ₽" },
+      { name: "Комплексная кампания", price: "от 9 000 ₽" },
+    ],
+  },
 ];
 
 const steps = [
@@ -147,7 +161,7 @@ const Promotion = () => {
                     Запускаем рекламные кампании в VK, Telegram, YouTube, Spotify и Яндекс Музыке. Реальные прослушивания, живая аудитория, прозрачная отчётность.
                   </p>
                   <div className="flex flex-wrap justify-center gap-3 mb-8">
-                    {["ВКонтакте", "Telegram", "YouTube", "Spotify", "Яндекс Музыка"].map((p) => (
+                    {["ВКонтакте", "Telegram", "YouTube", "Spotify", "Яндекс Музыка", "МТС Музыка"].map((p) => (
                       <span key={p} className="text-xs bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-zinc-300">
                         {p}
                       </span>
