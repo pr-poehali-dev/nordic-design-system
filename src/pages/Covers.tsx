@@ -183,13 +183,18 @@ const Covers = () => {
                   { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/200f0c3f-82e5-4673-a0dd-389a94349077.jpg", artist: "Диман Брюханов", title: "Фарами" },
                   { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/3ba37289-5049-4d9a-9a72-ac585ffab51b.jpg", artist: "The Midnight", title: "Crystalline" },
                   { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/1f50208b-ee19-4e81-8279-8235d132bded.jpg", artist: "Arst One × A$", title: "Дымом в облака" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/2c39706e-9a57-4a4e-8865-2e13d59e7a61.jpg", artist: "DRON", title: "Get Down (Original Mix)" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/a01f4824-d174-4416-9210-c98d95b6df30.jpg", artist: "Dron & Malevich.", title: "G House Pack" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/cf08893b-8979-4aad-b76c-e7bd23e37eba.jpg", artist: "Techno Project, Geny Tur", title: "The Best Deep" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/f1c0d32f-8034-42e7-9669-491810563613.jpg", artist: "Techno Project, Geny Tur", title: "House Symphony" },
+                  { url: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/080f7ad2-a6be-4471-bb6b-fa647bae731b.jpg", artist: "Techno Project, Geny Tur", title: "My Deep" },
                 ].map((item, i) => (
                   <div
                     key={i}
                     className={`group relative aspect-square rounded-xl overflow-hidden transition-all duration-700 ${
                       portfolio.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                     }`}
-                    style={{ transitionDelay: `${i * 80}ms` }}
+                    style={{ transitionDelay: `${i * 60}ms` }}
                   >
                     <img
                       src={item.url}
@@ -202,6 +207,21 @@ const Covers = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div
+                className={`flex justify-center mt-10 transition-all duration-700 delay-500 ${
+                  portfolio.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                }`}
+              >
+                <Button
+                  size="lg"
+                  className="bg-white text-black hover:bg-zinc-200 text-base px-10 py-6 rounded-full transition-all duration-300 hover:scale-105"
+                  asChild
+                >
+                  <a href="https://t.me/dizymusic" target="_blank" rel="noopener noreferrer">
+                    Заказать обложку →
+                  </a>
+                </Button>
               </div>
             </div>
           </section>
