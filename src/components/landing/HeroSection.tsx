@@ -38,7 +38,7 @@ const HeroSection = () => {
         style={{ transform: `translateY(${scrollY}px)`, opacity: scrollOpacity }}
         className="relative pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-16 px-4 transition-opacity duration-100 flex items-center min-h-screen"
       >
-        <div className="max-w-3xl mx-auto w-full">
+        <div className="max-w-5xl mx-auto w-full">
           <div className="animate-fade-in rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md p-6 sm:p-10 md:p-16 shadow-2xl mb-8">
             <div className="text-center">
               <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight relative">
