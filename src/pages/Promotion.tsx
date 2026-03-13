@@ -142,7 +142,7 @@ const Promotion = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-violet-950/20 via-black to-black" />
             <div className="container mx-auto px-4 relative">
               <div
-                className={`max-w-3xl mx-auto transition-all duration-700 ${
+                className={`max-w-5xl mx-auto transition-all duration-700 ${
                   hero.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
               >

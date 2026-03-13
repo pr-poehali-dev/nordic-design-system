@@ -142,7 +142,7 @@ const RadioMedia = () => {
           <section ref={hero.ref} className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-red-950/20 via-black to-black" />
             <div className="container mx-auto px-4 relative">
-              <div className={`max-w-3xl mx-auto transition-all duration-700 ${hero.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <div className={`max-w-5xl mx-auto transition-all duration-700 ${hero.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
                 <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md p-6 sm:p-10 md:p-16 shadow-2xl text-center">
                   <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
                     <Icon name="Radio" size={16} className="text-red-400" />
