@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, Crown, Zap, Star, Globe } from "lucide-react";
+import { Check, Crown, Zap, Star, Globe, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -175,6 +175,43 @@ const LicenseSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Скачать лицензионный договор */}
+        <div
+          className={`mt-16 transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+          }`}
+        >
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-r from-zinc-900 via-zinc-800/60 to-zinc-900 p-[1px]">
+            <div className="rounded-2xl bg-gradient-to-r from-black via-zinc-900/80 to-black px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-5">
+                <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                  <FileText className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-zinc-400 uppercase tracking-widest mb-1 font-medium">Документ</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Лицензионный договор</h3>
+                  <p className="text-sm text-zinc-400 mt-1">Официальный договор DIZY MUSIC · PDF</p>
+                </div>
+              </div>
+              <Button
+                asChild
+                className="flex-shrink-0 bg-white text-black hover:bg-zinc-200 transition-colors px-8 py-6 text-base font-semibold rounded-xl gap-2"
+              >
+                <a
+                  href="https://cloud.mail.ru/public/gYxK/yadpTFeXZ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
+                  <Download className="w-5 h-5" />
+                  Скачать договор
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
