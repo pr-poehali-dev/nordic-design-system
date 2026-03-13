@@ -69,7 +69,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <a href="/">
           <img
-            src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/9a467b5d-4236-46d2-9fb5-630dfe18e65a.png"
+            src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/a75184fa-712c-4d0a-886c-474ee0ee4f7c.png"
             alt="DIZY MUSIC"
             className="h-16 md:h-28 w-auto"
           />
