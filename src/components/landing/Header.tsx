@@ -177,6 +177,15 @@ const Header = () => {
                       Артист-бренд
                     </a>
                   </li>
+                  <li>
+                    <a
+                      href="/radio-media"
+                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Радио и СМИ
+                    </a>
+                  </li>
                 </ul>
               )}
             </li>
@@ -247,6 +256,14 @@ const Header = () => {
                     className="text-white hover:text-purple-400 transition-colors text-base"
                   >
                     Артист-бренд
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/radio-media"
+                    className="text-white hover:text-purple-400 transition-colors text-base"
+                  >
+                    Радио и СМИ
                   </a>
                 </li>
               </ul>
