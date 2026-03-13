@@ -71,7 +71,7 @@ const Header = () => {
           <img
             src="https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/a75184fa-712c-4d0a-886c-474ee0ee4f7c.png"
             alt="DIZY MUSIC"
-            className="h-10 md:h-16 w-auto"
+            className="h-10 md:h-24 w-auto"
           />
         </a>
 
