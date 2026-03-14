@@ -14,6 +14,7 @@ import ArtistBrand from "./pages/ArtistBrand";
 import RadioMedia from "./pages/RadioMedia";
 import Copyright from "./pages/Copyright";
 import Partnerships from "./pages/Partnerships";
+import Sync from "./pages/Sync";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/radio-media" element={<RadioMedia />} />
           <Route path="/copyright" element={<Copyright />} />
           <Route path="/partnerships" element={<Partnerships />} />
+          <Route path="/sync" element={<Sync />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
