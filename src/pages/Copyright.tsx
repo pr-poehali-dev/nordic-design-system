@@ -70,17 +70,19 @@ const faq = [
   },
 ];
 
-function useVisible(threshold = 0.15) {
+function useVisible() {
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
+    const el = ref.current;
+    if (!el) { setIsVisible(true); return; }
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold }
+      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.disconnect(); } },
+      { threshold: 0, rootMargin: "0px 0px -50px 0px" }
     );
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, []);
   return { ref, isVisible };
 }
 
@@ -98,10 +100,10 @@ const Copyright = () => {
     };
   }, []);
 
-  const hero = useVisible(0.1);
-  const servicesSection = useVisible(0.1);
-  const processSection = useVisible(0.1);
-  const faqSection = useVisible(0.1);
+  const hero = useVisible();
+  const servicesSection = useVisible();
+  const processSection = useVisible();
+  const faqSection = useVisible();
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
