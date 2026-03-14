@@ -195,6 +195,15 @@ const Header = () => {
                       Авторские права
                     </a>
                   </li>
+                  <li>
+                    <a
+                      href="/partnerships"
+                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Партнёрства с лейблами
+                    </a>
+                  </li>
                 </ul>
               )}
             </li>
@@ -281,6 +290,14 @@ const Header = () => {
                     className="text-white hover:text-purple-400 transition-colors text-base"
                   >
                     Авторские права
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/partnerships"
+                    className="text-white hover:text-purple-400 transition-colors text-base"
+                  >
+                    Партнёрства с лейблами
                   </a>
                 </li>
               </ul>

@@ -13,6 +13,7 @@ import Promotion from "./pages/Promotion";
 import ArtistBrand from "./pages/ArtistBrand";
 import RadioMedia from "./pages/RadioMedia";
 import Copyright from "./pages/Copyright";
+import Partnerships from "./pages/Partnerships";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/artist-brand" element={<ArtistBrand />} />
           <Route path="/radio-media" element={<RadioMedia />} />
           <Route path="/copyright" element={<Copyright />} />
+          <Route path="/partnerships" element={<Partnerships />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
