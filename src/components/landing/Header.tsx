@@ -96,7 +96,7 @@ const Header = () => {
             <NavItem id="about" label="О лейбле" />
             <NavItem id="distribution" label="Дистрибуция" />
 
-            {/* Услуги dropdown — desktop */}
+            {/* Услуги dropdown — desktop мегаменю */}
             <li ref={servicesRef} className="hidden md:block relative">
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
@@ -106,218 +106,171 @@ const Header = () => {
                 <Icon name={isServicesOpen ? "ChevronUp" : "ChevronDown"} size={14} />
               </button>
               {isServicesOpen && (
-                <ul className="absolute top-full left-0 mt-2 w-52 bg-black/95 border border-white/10 rounded-lg overflow-hidden shadow-xl">
-                  <li>
-                    <button
-                      onClick={() => handleNavClick("pitching")}
-                      className="w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                    >
-                      Питчинг
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => handleNavClick("licenses")}
-                      className="w-full text-left px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                    >
-                      Лицензии
-                    </button>
-                  </li>
-                  <li>
-                    <a
-                      href="/mix-mastering"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Сведение и мастеринг
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/remixes"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Ремиксы на заказ
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/custom-tracks"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Треки на заказ
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/covers"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Обложки
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/promotion"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Продвижение музыки
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/artist-brand"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Артист-бренд
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/radio-media"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Радио и СМИ
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/copyright"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Авторские права
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/partnerships"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Партнёрства с лейблами
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/sync"
-                      className="block px-4 py-3 text-sm text-white hover:bg-white/10 hover:text-purple-400 transition-colors"
-                      onClick={() => setIsServicesOpen(false)}
-                    >
-                      Синхронизация (кино, реклама, ТВ)
-                    </a>
-                  </li>
-                </ul>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[680px] bg-black/97 border border-white/10 rounded-2xl shadow-2xl p-5 backdrop-blur-md">
+                  <div className="grid grid-cols-3 gap-x-6 gap-y-1">
+
+                    {/* Колонка 1 — Производство */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+                        <Icon name="Mic2" size={13} className="text-purple-400" />
+                        <span className="text-xs font-semibold uppercase tracking-widest text-purple-400">Производство</span>
+                      </div>
+                      <ul className="space-y-0.5">
+                        {[
+                          { href: "/mix-mastering", icon: "Sliders", label: "Сведение и мастеринг" },
+                          { href: "/remixes", icon: "Shuffle", label: "Ремиксы на заказ" },
+                          { href: "/custom-tracks", icon: "Music", label: "Треки на заказ" },
+                          { href: "/covers", icon: "Image", label: "Обложки" },
+                        ].map((item) => (
+                          <li key={item.href}>
+                            <a
+                              href={item.href}
+                              onClick={() => setIsServicesOpen(false)}
+                              className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm text-zinc-300 hover:text-white hover:bg-white/8 transition-colors group"
+                            >
+                              <Icon name={item.icon} size={14} className="text-zinc-500 group-hover:text-purple-400 transition-colors shrink-0" />
+                              {item.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Колонка 2 — Продвижение */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+                        <Icon name="TrendingUp" size={13} className="text-sky-400" />
+                        <span className="text-xs font-semibold uppercase tracking-widest text-sky-400">Продвижение</span>
+                      </div>
+                      <ul className="space-y-0.5">
+                        {[
+                          { action: "pitching", icon: "Send", label: "Питчинг в плейлисты" },
+                          { href: "/promotion", icon: "BarChart2", label: "Продвижение музыки" },
+                          { href: "/radio-media", icon: "Radio", label: "Радио и СМИ" },
+                          { href: "/artist-brand", icon: "Sparkles", label: "Артист-бренд" },
+                        ].map((item) => (
+                          <li key={item.href ?? item.action}>
+                            {"href" in item ? (
+                              <a
+                                href={item.href}
+                                onClick={() => setIsServicesOpen(false)}
+                                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm text-zinc-300 hover:text-white hover:bg-white/8 transition-colors group"
+                              >
+                                <Icon name={item.icon} size={14} className="text-zinc-500 group-hover:text-sky-400 transition-colors shrink-0" />
+                                {item.label}
+                              </a>
+                            ) : (
+                              <button
+                                onClick={() => handleNavClick(item.action!)}
+                                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm text-zinc-300 hover:text-white hover:bg-white/8 transition-colors group w-full text-left"
+                              >
+                                <Icon name={item.icon} size={14} className="text-zinc-500 group-hover:text-sky-400 transition-colors shrink-0" />
+                                {item.label}
+                              </button>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Колонка 3 — Права и сделки */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+                        <Icon name="Shield" size={13} className="text-emerald-400" />
+                        <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">Права и сделки</span>
+                      </div>
+                      <ul className="space-y-0.5">
+                        {[
+                          { action: "licenses", icon: "FileText", label: "Лицензии" },
+                          { href: "/copyright", icon: "ShieldCheck", label: "Авторские права" },
+                          { href: "/partnerships", icon: "Handshake", label: "Партнёрства с лейблами" },
+                          { href: "/sync", icon: "Film", label: "Синхронизация (кино, ТВ)" },
+                        ].map((item) => (
+                          <li key={item.href ?? item.action}>
+                            {"href" in item ? (
+                              <a
+                                href={item.href}
+                                onClick={() => setIsServicesOpen(false)}
+                                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm text-zinc-300 hover:text-white hover:bg-white/8 transition-colors group"
+                              >
+                                <Icon name={item.icon} size={14} className="text-zinc-500 group-hover:text-emerald-400 transition-colors shrink-0" />
+                                {item.label}
+                              </a>
+                            ) : (
+                              <button
+                                onClick={() => handleNavClick(item.action!)}
+                                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm text-zinc-300 hover:text-white hover:bg-white/8 transition-colors group w-full text-left"
+                              >
+                                <Icon name={item.icon} size={14} className="text-zinc-500 group-hover:text-emerald-400 transition-colors shrink-0" />
+                                {item.label}
+                              </button>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
               )}
             </li>
 
             {/* Услуги — mobile */}
             <li className="md:hidden">
-              <span className="text-white/50 text-sm uppercase tracking-wider">Услуги</span>
-              <ul className="mt-2 space-y-2 pl-3 border-l border-white/10">
-                <li>
-                  <button
-                    onClick={() => handleNavClick("pitching")}
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Питчинг
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => handleNavClick("licenses")}
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Лицензии
-                  </button>
-                </li>
-                <li>
-                  <a
-                    href="/mix-mastering"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Сведение и мастеринг
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/remixes"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Ремиксы на заказ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/custom-tracks"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Треки на заказ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/covers"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Обложки
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/promotion"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Продвижение музыки
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/artist-brand"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Артист-бренд
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/radio-media"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Радио и СМИ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/copyright"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Авторские права
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/partnerships"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Партнёрства с лейблами
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/sync"
-                    className="text-white hover:text-purple-400 transition-colors text-base"
-                  >
-                    Синхронизация (кино, реклама, ТВ)
-                  </a>
-                </li>
-              </ul>
+              <span className="text-white/50 text-xs font-semibold uppercase tracking-widest">Услуги</span>
+              <div className="mt-3 space-y-4">
+
+                {/* Производство */}
+                <div>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Icon name="Mic2" size={12} className="text-purple-400" />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-purple-400">Производство</span>
+                  </div>
+                  <ul className="space-y-1 pl-3 border-l border-purple-400/30">
+                    <li><a href="/mix-mastering" className="text-zinc-300 hover:text-white transition-colors text-sm">Сведение и мастеринг</a></li>
+                    <li><a href="/remixes" className="text-zinc-300 hover:text-white transition-colors text-sm">Ремиксы на заказ</a></li>
+                    <li><a href="/custom-tracks" className="text-zinc-300 hover:text-white transition-colors text-sm">Треки на заказ</a></li>
+                    <li><a href="/covers" className="text-zinc-300 hover:text-white transition-colors text-sm">Обложки</a></li>
+                  </ul>
+                </div>
+
+                {/* Продвижение */}
+                <div>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Icon name="TrendingUp" size={12} className="text-sky-400" />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-sky-400">Продвижение</span>
+                  </div>
+                  <ul className="space-y-1 pl-3 border-l border-sky-400/30">
+                    <li>
+                      <button onClick={() => handleNavClick("pitching")} className="text-zinc-300 hover:text-white transition-colors text-sm text-left">
+                        Питчинг в плейлисты
+                      </button>
+                    </li>
+                    <li><a href="/promotion" className="text-zinc-300 hover:text-white transition-colors text-sm">Продвижение музыки</a></li>
+                    <li><a href="/radio-media" className="text-zinc-300 hover:text-white transition-colors text-sm">Радио и СМИ</a></li>
+                    <li><a href="/artist-brand" className="text-zinc-300 hover:text-white transition-colors text-sm">Артист-бренд</a></li>
+                  </ul>
+                </div>
+
+                {/* Права и сделки */}
+                <div>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Icon name="Shield" size={12} className="text-emerald-400" />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">Права и сделки</span>
+                  </div>
+                  <ul className="space-y-1 pl-3 border-l border-emerald-400/30">
+                    <li>
+                      <button onClick={() => handleNavClick("licenses")} className="text-zinc-300 hover:text-white transition-colors text-sm text-left">
+                        Лицензии
+                      </button>
+                    </li>
+                    <li><a href="/copyright" className="text-zinc-300 hover:text-white transition-colors text-sm">Авторские права</a></li>
+                    <li><a href="/partnerships" className="text-zinc-300 hover:text-white transition-colors text-sm">Партнёрства с лейблами</a></li>
+                    <li><a href="/sync" className="text-zinc-300 hover:text-white transition-colors text-sm">Синхронизация (кино, ТВ)</a></li>
+                  </ul>
+                </div>
+
+              </div>
             </li>
 
             <li className="md:hidden pt-2 border-t border-white/10 flex items-center gap-4">
