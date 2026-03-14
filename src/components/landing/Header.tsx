@@ -117,6 +117,7 @@ const Header = () => {
                       </div>
                       <ul className="space-y-0.5">
                         {[
+                          { href: "/album-ep", icon: "Album", label: "Выпуск альбома и EP" },
                           { href: "/mix-mastering", icon: "Sliders", label: "Сведение и мастеринг" },
                           { href: "/remixes", icon: "Shuffle", label: "Ремиксы на заказ" },
                           { href: "/custom-tracks", icon: "Music", label: "Треки на заказ" },
@@ -227,6 +228,7 @@ const Header = () => {
                     <span className="text-xs font-semibold uppercase tracking-widest text-purple-400">Производство</span>
                   </div>
                   <ul className="space-y-1 pl-3 border-l border-purple-400/30">
+                    <li><a href="/album-ep" className="text-zinc-300 hover:text-white transition-colors text-sm">Выпуск альбома и EP</a></li>
                     <li><a href="/mix-mastering" className="text-zinc-300 hover:text-white transition-colors text-sm">Сведение и мастеринг</a></li>
                     <li><a href="/remixes" className="text-zinc-300 hover:text-white transition-colors text-sm">Ремиксы на заказ</a></li>
                     <li><a href="/custom-tracks" className="text-zinc-300 hover:text-white transition-colors text-sm">Треки на заказ</a></li>
