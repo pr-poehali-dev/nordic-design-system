@@ -34,7 +34,7 @@ def handler(event: dict, context) -> dict:
     path = event.get("path", "/")
     schema = os.environ.get("MAIN_DB_SCHEMA", "public")
 
-    # GET / — список треков
+    # GET / — список треков (без авторизации)
     if method == "GET":
         conn = get_conn()
         cur = conn.cursor()
@@ -49,6 +49,11 @@ def handler(event: dict, context) -> dict:
         return resp(200, {"tracks": tracks})
 
     body = json.loads(event.get("body") or "{}")
+
+    # Проверка пароля для всех изменяющих операций
+    admin_password = os.environ.get("ADMIN_PASSWORD", "")
+    if body.get("password") != admin_password:
+        return resp(403, {"error": "Неверный пароль"})
 
     # POST /add — добавить трек вручную
     if method == "POST" and path.endswith("/add"):

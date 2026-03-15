@@ -39,6 +39,11 @@ const emptyForm = {
 };
 
 export default function AdminTrending() {
+  const [password, setPassword] = useState("");
+  const [authed, setAuthed] = useState(() => !!sessionStorage.getItem("admin_auth"));
+  const [authError, setAuthError] = useState(false);
+  const [authLoading, setAuthLoading] = useState(false);
+
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ ...emptyForm });
@@ -48,6 +53,8 @@ export default function AdminTrending() {
   const [msg, setMsg] = useState<{ text: string; ok: boolean } | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const storedPassword = sessionStorage.getItem("admin_auth") || "";
 
   const notify = (text: string, ok = true) => {
     setMsg({ text, ok });
@@ -62,7 +69,27 @@ export default function AdminTrending() {
     setLoading(false);
   };
 
-  useEffect(() => { loadTracks(); }, []);
+  useEffect(() => {
+    if (authed) loadTracks();
+  }, [authed]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthLoading(true);
+    setAuthError(false);
+    const r = await fetch(`${API}/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password, _check: true, title: "", artist: "", src: "", rank: 0 }),
+    });
+    setAuthLoading(false);
+    if (r.status === 403) {
+      setAuthError(true);
+    } else {
+      sessionStorage.setItem("admin_auth", password);
+      setAuthed(true);
+    }
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -74,7 +101,7 @@ export default function AdminTrending() {
       const r = await fetch(`${API}/upload`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, file: base64 }),
+        body: JSON.stringify({ ...form, password: storedPassword, file: base64 }),
       });
       const data = await r.json();
       setUploading(false);
@@ -99,7 +126,7 @@ export default function AdminTrending() {
       await fetch(`${API}/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, id: editId }),
+        body: JSON.stringify({ ...form, id: editId, password: storedPassword }),
       });
       notify("Трек обновлён!");
       setEditId(null);
@@ -107,7 +134,7 @@ export default function AdminTrending() {
       await fetch(`${API}/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, password: storedPassword }),
       });
       notify("Трек добавлен!");
     }
@@ -135,7 +162,7 @@ export default function AdminTrending() {
     await fetch(`${API}/delete`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ id, password: storedPassword }),
     });
     setDeleteId(null);
     notify("Трек удалён!");
@@ -146,6 +173,50 @@ export default function AdminTrending() {
     setEditId(null);
     setForm({ ...emptyForm });
   };
+
+  // Экран входа
+  if (!authed) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+        <div className="w-full max-w-sm">
+          <div className="text-center mb-8">
+            <div className="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mx-auto mb-4">
+              <Icon name="Lock" size={24} className="text-purple-400" />
+            </div>
+            <h1 className="text-2xl font-bold text-white">Вход в админку</h1>
+            <p className="text-zinc-500 text-sm mt-1">Управление трендами DIZY MUSIC</p>
+          </div>
+          <form onSubmit={handleLogin} className="bg-zinc-900 border border-white/10 rounded-2xl p-6">
+            <label className="text-zinc-400 text-xs mb-1 block">Пароль</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoFocus
+              className={`w-full bg-zinc-800 border rounded-lg px-3 py-2.5 text-white text-sm mb-4 focus:outline-none focus:border-purple-500 ${authError ? "border-red-500" : "border-white/10"}`}
+              placeholder="Введи пароль"
+            />
+            {authError && (
+              <p className="text-red-400 text-xs mb-3 flex items-center gap-1">
+                <Icon name="AlertCircle" size={12} />
+                Неверный пароль
+              </p>
+            )}
+            <Button
+              type="submit"
+              disabled={authLoading || !password}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-xl"
+            >
+              {authLoading ? "Проверяю..." : "Войти"}
+            </Button>
+          </form>
+          <p className="text-center mt-4">
+            <a href="/" className="text-zinc-600 hover:text-zinc-400 text-sm transition-colors">← На сайт</a>
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
@@ -162,10 +233,18 @@ export default function AdminTrending() {
               Управление трендами
             </h1>
           </div>
-          <a href="/trending" target="_blank" className="text-zinc-400 hover:text-white text-sm flex items-center gap-1">
-            <Icon name="ExternalLink" size={14} />
-            Страница трендов
-          </a>
+          <div className="flex items-center gap-3">
+            <a href="/trending" target="_blank" className="text-zinc-400 hover:text-white text-sm flex items-center gap-1">
+              <Icon name="ExternalLink" size={14} />
+              Страница трендов
+            </a>
+            <button
+              onClick={() => { sessionStorage.removeItem("admin_auth"); setAuthed(false); }}
+              className="text-zinc-600 hover:text-zinc-400 text-sm transition-colors"
+            >
+              Выйти
+            </button>
+          </div>
         </div>
 
         {/* Уведомление */}
@@ -343,7 +422,7 @@ export default function AdminTrending() {
                         onClick={() => setDeleteId(track.id)}
                         className="w-8 h-8 rounded-lg bg-white/5 hover:bg-red-500/20 flex items-center justify-center transition-colors"
                       >
-                        <Icon name="Trash2" size={13} className="text-zinc-400 hover:text-red-400" />
+                        <Icon name="Trash2" size={13} className="text-zinc-400" />
                       </button>
                     )}
                   </div>
