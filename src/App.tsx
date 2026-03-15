@@ -18,6 +18,7 @@ import Sync from "./pages/Sync";
 import AlbumEP from "./pages/AlbumEP";
 import Distribution from "./pages/Distribution";
 import CareerManagement from "./pages/CareerManagement";
+import BeatMarket from "./pages/BeatMarket";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/album-ep" element={<AlbumEP />} />
           <Route path="/distribution" element={<Distribution />} />
           <Route path="/career-management" element={<CareerManagement />} />
+          <Route path="/beat-market" element={<BeatMarket />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
