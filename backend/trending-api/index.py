@@ -34,6 +34,14 @@ def handler(event: dict, context) -> dict:
     path = event.get("path", "/")
     schema = os.environ.get("MAIN_DB_SCHEMA", "public")
 
+    # POST /check — быстрая проверка пароля
+    if method == "POST" and path.endswith("/check"):
+        body = json.loads(event.get("body") or "{}")
+        admin_password = os.environ.get("ADMIN_PASSWORD", "")
+        if body.get("password") == admin_password:
+            return resp(200, {"ok": True})
+        return resp(403, {"error": "Неверный пароль"})
+
     # GET / — список треков (без авторизации)
     if method == "GET":
         conn = get_conn()

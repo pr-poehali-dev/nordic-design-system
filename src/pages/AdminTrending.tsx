@@ -77,10 +77,10 @@ export default function AdminTrending() {
     e.preventDefault();
     setAuthLoading(true);
     setAuthError(false);
-    const r = await fetch(`${API}/add`, {
+    const r = await fetch(`${API}/check`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password, _check: true, title: "", artist: "", src: "", rank: 0 }),
+      body: JSON.stringify({ password }),
     });
     setAuthLoading(false);
     if (r.status === 403) {
