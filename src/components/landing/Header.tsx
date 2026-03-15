@@ -146,6 +146,7 @@ const Header = () => {
                       </div>
                       <ul className="space-y-0.5">
                         {[
+                          { href: "/trending", icon: "Flame", label: "Сейчас в тренде" },
                           { href: "/distribution", icon: "Globe", label: "Международная дистрибуция" },
                           { action: "pitching", icon: "Send", label: "Питчинг в плейлисты" },
                           { href: "/promotion", icon: "BarChart2", label: "Продвижение музыки" },
@@ -247,6 +248,7 @@ const Header = () => {
                     <span className="text-xs font-semibold uppercase tracking-widest text-sky-400">Продвижение</span>
                   </div>
                   <ul className="space-y-1 pl-3 border-l border-sky-400/30">
+                    <li><a href="/trending" className="text-zinc-300 hover:text-white transition-colors text-sm">Сейчас в тренде</a></li>
                     <li><a href="/distribution" className="text-zinc-300 hover:text-white transition-colors text-sm">Международная дистрибуция</a></li>
                     <li>
                       <button onClick={() => handleNavClick("pitching")} className="text-zinc-300 hover:text-white transition-colors text-sm text-left">
