@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { Helmet } from "react-helmet";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
@@ -108,20 +107,15 @@ export default function BeatMarket() {
     setPlayingId((prev) => (prev === id ? null : id));
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    document.title = "Маркет битов — купить бит онлайн | DIZY MUSIC";
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", "Маркет битов DIZY MUSIC — купить бит онлайн. Trap, Hip-Hop, R&B, Drill, Phonk и другие жанры. Базовые, премиум и эксклюзивные лицензии. Доставка 24 часа.");
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute("href", "https://dizymusic.ru/beat-market");
+  }, []);
 
   return (
-    <>
-      <Helmet>
-        <title>Маркет битов — купить бит онлайн | DIZY MUSIC</title>
-        <meta name="description" content="Маркет битов DIZY MUSIC — купить бит онлайн. Trap, Hip-Hop, R&B, Drill, Phonk и 50+ жанров. Базовые, премиум и эксклюзивные лицензии. Мгновенная доставка файлов." />
-        <meta name="keywords" content="купить бит, маркет битов, биты для рэпа, trap beat, drill beat, rnb beat, phonk beat, эксклюзивный бит, WAV бит, лицензия на бит" />
-        <link rel="canonical" href="https://dizymusic.ru/beat-market" />
-        <meta property="og:title" content="Маркет битов — DIZY MUSIC" />
-        <meta property="og:description" content="200+ лицензионных битов от продюсеров DIZY MUSIC. Слушай, выбирай, покупай онлайн." />
-        <meta property="og:url" content="https://dizymusic.ru/beat-market" />
-        <meta property="og:type" content="website" />
-      </Helmet>
     <div className="min-h-screen bg-black text-white">
       <InteractiveBackground />
       <Header />
@@ -440,7 +434,6 @@ export default function BeatMarket() {
 
       <Footer />
     </div>
-    </>
   );
 }
 
