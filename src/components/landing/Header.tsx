@@ -183,6 +183,7 @@ const Header = () => {
                       </div>
                       <ul className="space-y-0.5">
                         {[
+                          { href: "/career-management", icon: "Crown", label: "Управление карьерой" },
                           { action: "licenses", icon: "FileText", label: "Лицензии" },
                           { href: "/copyright", icon: "ShieldCheck", label: "Авторские права" },
                           { href: "/partnerships", icon: "Handshake", label: "Партнёрства с лейблами" },
@@ -263,6 +264,7 @@ const Header = () => {
                     <span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">Права и сделки</span>
                   </div>
                   <ul className="space-y-1 pl-3 border-l border-emerald-400/30">
+                    <li><a href="/career-management" className="text-zinc-300 hover:text-white transition-colors text-sm">Управление карьерой</a></li>
                     <li>
                       <button onClick={() => handleNavClick("licenses")} className="text-zinc-300 hover:text-white transition-colors text-sm text-left">
                         Лицензии
