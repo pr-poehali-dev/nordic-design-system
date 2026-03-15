@@ -3,6 +3,20 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
 
+const API = "https://functions.poehali.dev/b98224d2-b4a3-4a16-acce-c1e6afcee00d";
+
+interface Track {
+  id: number;
+  rank: number;
+  title: string;
+  artist: string;
+  genre: string;
+  isNew: boolean;
+  isHot: boolean;
+  coverColor: string;
+  src: string;
+}
+
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -17,90 +31,7 @@ function useVisible(threshold = 0.1) {
   return { ref, isVisible };
 }
 
-const CDN = "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/";
 
-const trending = [
-  {
-    rank: 1,
-    title: "Нелюбовь",
-    artist: "Гости из будущего (Alexx Slam Remix)",
-    genre: "Club House",
-    isNew: true,
-    isHot: true,
-    coverColor: "from-purple-600 to-pink-600",
-    src: CDN + "23da0f7c-62ae-472f-bbcd-92490bfefdd2.mp3",
-  },
-  {
-    rank: 2,
-    title: "О Боже, какой мужчина!",
-    artist: "Натали (Alexx Slam Remix)",
-    genre: "Club House",
-    isNew: false,
-    isHot: true,
-    coverColor: "from-sky-500 to-blue-700",
-    src: CDN + "6dd62d72-82fb-45e7-8fac-0880834c2174.mp3",
-  },
-  {
-    rank: 3,
-    title: "E Samba",
-    artist: "Junior Jack (Mike Prado Extended Mix)",
-    genre: "Club House",
-    isNew: false,
-    isHot: false,
-    coverColor: "from-orange-500 to-amber-600",
-    src: CDN + "75d0cd23-ff50-40e7-97e0-d06de6442bc4.mp3",
-  },
-  {
-    rank: 4,
-    title: "Party Rock Anthem",
-    artist: "LMFAO (Chad & Mike Prado Extended Mix)",
-    genre: "Club House",
-    isNew: true,
-    isHot: false,
-    coverColor: "from-yellow-500 to-red-500",
-    src: CDN + "7e7a7075-6f83-4169-ad4f-1cc4781dc2ec.mp3",
-  },
-  {
-    rank: 5,
-    title: "Hey Baby",
-    artist: "Pitbull & T-Pain (Eddie G & Starkov Remix)",
-    genre: "Club House",
-    isNew: false,
-    isHot: false,
-    coverColor: "from-emerald-600 to-teal-800",
-    src: CDN + "aba1cc27-867c-47a9-8643-49c8e6dacf9a.mp3",
-  },
-  {
-    rank: 6,
-    title: "Candy Shop",
-    artist: "50 Cent (Eddie G & Starkov Extended Remix)",
-    genre: "Club House",
-    isNew: false,
-    isHot: false,
-    coverColor: "from-red-600 to-rose-800",
-    src: CDN + "cd50c996-224c-40ba-bbb0-3e67429d71b4.mp3",
-  },
-  {
-    rank: 7,
-    title: "Я робот",
-    artist: "Катя Чехова (DJ JON & OLMEGA Extended Remix)",
-    genre: "Club House",
-    isNew: true,
-    isHot: false,
-    coverColor: "from-slate-500 to-blue-900",
-    src: CDN + "9ba186f1-61d0-48c2-9dcb-217df6b78d82.mp3",
-  },
-  {
-    rank: 8,
-    title: "We Will Rock You",
-    artist: "Queen (Dmc Cox Extended Mix)",
-    genre: "Club House",
-    isNew: false,
-    isHot: false,
-    coverColor: "from-violet-700 to-purple-900",
-    src: CDN + "cea48050-fa6c-447c-9904-3c334f64d1cd.mp3",
-  },
-];
 
 const benefits = [
   {
@@ -158,12 +89,21 @@ export default function Trending() {
   const faqSection = useVisible(0.1);
   const ctaSection = useVisible(0.1);
 
+  const [trending, setTrending] = useState<Track[]>([]);
+  const [tracksLoading, setTracksLoading] = useState(true);
   const [playing, setPlaying] = useState<number | null>(null);
   const [progress, setProgress] = useState<Record<number, number>>({});
   const [duration, setDuration] = useState<Record<number, number>>({});
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const audioRefs = useRef<Record<number, HTMLAudioElement>>({});
+
+  useEffect(() => {
+    fetch(API)
+      .then((r) => r.json())
+      .then((data) => { setTrending(data.tracks || []); setTracksLoading(false); })
+      .catch(() => setTracksLoading(false));
+  }, []);
 
   const getAudio = useCallback((rank: number, src: string) => {
     if (!audioRefs.current[rank]) {
@@ -287,7 +227,7 @@ export default function Trending() {
                   </div>
                   <div className="flex flex-wrap gap-6 mt-8 pt-6 border-t border-white/10">
                     {[
-                      { label: "Треков в топе", value: "8" },
+                      { label: "Треков в топе", value: String(trending.length || 8) },
                       { label: "Слушателей в месяц", value: "18K+" },
                       { label: "Обновление", value: "Еженедельно" },
                       { label: "Качество", value: "WAV + MP3" },
@@ -316,6 +256,13 @@ export default function Trending() {
                   <span>обновлено сегодня</span>
                 </div>
               </div>
+
+              {tracksLoading && (
+                <div className="flex items-center justify-center py-12 text-zinc-500 gap-3">
+                  <Icon name="Loader2" size={20} className="animate-spin" />
+                  <span>Загружаю треки...</span>
+                </div>
+              )}
 
               <div className="space-y-2">
                 {trending.map((track, idx) => {
