@@ -16,6 +16,7 @@ import Copyright from "./pages/Copyright";
 import Partnerships from "./pages/Partnerships";
 import Sync from "./pages/Sync";
 import AlbumEP from "./pages/AlbumEP";
+import Distribution from "./pages/Distribution";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/partnerships" element={<Partnerships />} />
           <Route path="/sync" element={<Sync />} />
           <Route path="/album-ep" element={<AlbumEP />} />
+          <Route path="/distribution" element={<Distribution />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
