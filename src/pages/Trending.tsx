@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
@@ -17,94 +17,88 @@ function useVisible(threshold = 0.1) {
   return { ref, isVisible };
 }
 
+const CDN = "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/";
+
 const trending = [
   {
     rank: 1,
     title: "Midnight Dreams",
     artist: "DIZY feat. Alina",
     genre: "Future Bass",
-    plays: "142K",
-    duration: "3:24",
     isNew: true,
     isHot: true,
     coverColor: "from-purple-600 to-pink-600",
+    src: CDN + "23da0f7c-62ae-472f-bbcd-92490bfefdd2.mp3",
   },
   {
     rank: 2,
     title: "Neon City",
     artist: "DIZY Remix",
     genre: "Synthwave",
-    plays: "98K",
-    duration: "3:57",
     isNew: false,
     isHot: true,
     coverColor: "from-sky-500 to-blue-700",
+    src: CDN + "6dd62d72-82fb-45e7-8fac-0880834c2174.mp3",
   },
   {
     rank: 3,
     title: "Dark Matter",
     artist: "DIZY feat. Max V.",
     genre: "Trap",
-    plays: "87K",
-    duration: "2:48",
     isNew: false,
     isHot: false,
     coverColor: "from-zinc-700 to-zinc-900",
+    src: CDN + "75d0cd23-ff50-40e7-97e0-d06de6442bc4.mp3",
   },
   {
     rank: 4,
     title: "Summer Haze",
     artist: "DIZY Remix",
     genre: "Afrobeat",
-    plays: "73K",
-    duration: "3:12",
     isNew: true,
     isHot: false,
     coverColor: "from-orange-500 to-yellow-400",
+    src: CDN + "7e7a7075-6f83-4169-ad4f-1cc4781dc2ec.mp3",
   },
   {
     rank: 5,
     title: "Ghost Signal",
     artist: "DIZY x Kira",
     genre: "Lo-Fi",
-    plays: "61K",
-    duration: "4:05",
     isNew: false,
     isHot: false,
     coverColor: "from-emerald-600 to-teal-800",
+    src: CDN + "aba1cc27-867c-47a9-8643-49c8e6dacf9a.mp3",
   },
   {
     rank: 6,
     title: "Red Lights",
     artist: "DIZY Remix",
     genre: "House",
-    plays: "54K",
-    duration: "3:38",
     isNew: false,
     isHot: false,
     coverColor: "from-red-600 to-rose-800",
+    src: CDN + "cd50c996-224c-40ba-bbb0-3e67429d71b4.mp3",
   },
   {
     rank: 7,
     title: "Ice Cold",
     artist: "DIZY feat. Den",
     genre: "Drill",
-    plays: "49K",
-    duration: "2:55",
     isNew: true,
     isHot: false,
     coverColor: "from-slate-500 to-blue-900",
+    src: CDN + "9ba186f1-61d0-48c2-9dcb-217df6b78d82.mp3",
   },
   {
     rank: 8,
     title: "Frequency",
     artist: "DIZY Remix",
     genre: "Techno",
-    plays: "41K",
-    duration: "5:10",
     isNew: false,
     isHot: false,
     coverColor: "from-violet-700 to-purple-900",
+    src: CDN + "cea48050-fa6c-447c-9904-3c334f64d1cd.mp3",
   },
 ];
 
@@ -150,6 +144,13 @@ const faqs = [
   },
 ];
 
+function formatTime(sec: number) {
+  if (!isFinite(sec)) return "0:00";
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
 export default function Trending() {
   const hero = useVisible(0.1);
   const tracksSection = useVisible(0.1);
@@ -158,11 +159,60 @@ export default function Trending() {
   const ctaSection = useVisible(0.1);
 
   const [playing, setPlaying] = useState<number | null>(null);
+  const [progress, setProgress] = useState<Record<number, number>>({});
+  const [duration, setDuration] = useState<Record<number, number>>({});
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const audioRefs = useRef<Record<number, HTMLAudioElement>>({});
+
+  const getAudio = useCallback((rank: number, src: string) => {
+    if (!audioRefs.current[rank]) {
+      const audio = new Audio(src);
+      audio.preload = "none";
+      audio.addEventListener("timeupdate", () => {
+        setProgress((p) => ({ ...p, [rank]: audio.currentTime }));
+      });
+      audio.addEventListener("loadedmetadata", () => {
+        setDuration((d) => ({ ...d, [rank]: audio.duration }));
+      });
+      audio.addEventListener("ended", () => {
+        setPlaying((cur) => (cur === rank ? null : cur));
+        setProgress((p) => ({ ...p, [rank]: 0 }));
+      });
+      audioRefs.current[rank] = audio;
+    }
+    return audioRefs.current[rank];
+  }, []);
+
+  const togglePlay = useCallback((rank: number, src: string) => {
+    const audio = getAudio(rank, src);
+    if (playing === rank) {
+      audio.pause();
+      setPlaying(null);
+    } else {
+      if (playing !== null && audioRefs.current[playing]) {
+        audioRefs.current[playing].pause();
+      }
+      audio.play();
+      setPlaying(rank);
+    }
+  }, [playing, getAudio]);
+
+  const handleSeek = useCallback((rank: number, src: string, e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = getAudio(rank, src);
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = ratio * (audio.duration || 0);
+  }, [getAudio]);
+
+  useEffect(() => {
+    return () => {
+      Object.values(audioRefs.current).forEach((a) => { a.pause(); a.src = ""; });
+    };
+  }, []);
 
   useEffect(() => {
     document.title = "Сейчас в тренде — DIZY MUSIC | Топ ремиксов недели";
-
     const setMeta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
       if (!el) { el = document.createElement("meta"); el.setAttribute("name", name); document.head.appendChild(el); }
@@ -178,7 +228,6 @@ export default function Trending() {
       if (!el) { el = document.createElement("link"); el.setAttribute("rel", rel); document.head.appendChild(el); }
       el.setAttribute("href", href);
     };
-
     setMeta("description", "Топ ремиксов и треков DIZY MUSIC прямо сейчас. Слушай и скачивай самую горячую музыку за 500 ₽/мес. Обновление каждую неделю.");
     setMeta("keywords", "тренды музыки, топ ремиксы, скачать ремикс, DIZY MUSIC, горящие треки, подписка на музыку");
     setOg("og:title", "Сейчас в тренде — DIZY MUSIC");
@@ -207,7 +256,6 @@ export default function Trending() {
                     <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                     <span className="text-red-400 text-sm font-medium">Обновлено сегодня</span>
                   </div>
-
                   <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                     <div>
                       <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
@@ -220,7 +268,6 @@ export default function Trending() {
                         Самые горящие ремиксы и треки DIZY MUSIC прямо сейчас. Подпишись — слушай и скачивай всё без ограничений.
                       </p>
                     </div>
-
                     <div className="flex-shrink-0">
                       <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center min-w-[200px]">
                         <p className="text-zinc-400 text-sm mb-1">Подписка</p>
@@ -238,7 +285,6 @@ export default function Trending() {
                       </div>
                     </div>
                   </div>
-
                   <div className="flex flex-wrap gap-6 mt-8 pt-6 border-t border-white/10">
                     {[
                       { label: "Треков в топе", value: "8" },
@@ -272,76 +318,97 @@ export default function Trending() {
               </div>
 
               <div className="space-y-2">
-                {trending.map((track, idx) => (
-                  <div
-                    key={track.rank}
-                    className={`group flex items-center gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-zinc-900/40 hover:bg-zinc-800/60 hover:border-white/10 transition-all duration-200 ${tracksSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-                    style={{ transitionDelay: `${idx * 60}ms` }}
-                  >
-                    {/* Rank */}
-                    <span className="text-zinc-600 font-bold text-sm w-6 text-center flex-shrink-0">{track.rank}</span>
+                {trending.map((track, idx) => {
+                  const isPlaying = playing === track.rank;
+                  const cur = progress[track.rank] || 0;
+                  const dur = duration[track.rank] || 0;
+                  const pct = dur > 0 ? (cur / dur) * 100 : 0;
 
-                    {/* Cover */}
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${track.coverColor} flex-shrink-0 flex items-center justify-center relative overflow-hidden`}>
-                      {playing === track.rank ? (
-                        <div className="flex gap-0.5 items-end h-5">
-                          {[1,2,3,4].map((b) => (
-                            <span key={b} className="w-1 bg-white rounded-sm animate-bounce" style={{ height: `${[14,10,18,8][b-1]}px`, animationDelay: `${b*0.1}s` }} />
-                          ))}
+                  return (
+                    <div
+                      key={track.rank}
+                      className={`group flex flex-col gap-2 p-3 md:p-4 rounded-xl border transition-all duration-200 ${
+                        isPlaying
+                          ? "border-purple-500/40 bg-purple-950/30"
+                          : "border-white/5 bg-zinc-900/40 hover:bg-zinc-800/60 hover:border-white/10"
+                      } ${tracksSection.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                      style={{ transitionDelay: `${idx * 60}ms` }}
+                    >
+                      <div className="flex items-center gap-3 md:gap-4">
+                        {/* Rank */}
+                        <span className="text-zinc-600 font-bold text-sm w-5 text-center flex-shrink-0">{track.rank}</span>
+
+                        {/* Cover / play button */}
+                        <button
+                          onClick={() => togglePlay(track.rank, track.src)}
+                          className={`w-11 h-11 rounded-lg bg-gradient-to-br ${track.coverColor} flex-shrink-0 flex items-center justify-center hover:scale-105 transition-transform`}
+                        >
+                          {isPlaying ? (
+                            <div className="flex gap-0.5 items-end h-4">
+                              {[14, 10, 18, 8].map((h, i) => (
+                                <span
+                                  key={i}
+                                  className="w-1 bg-white rounded-sm animate-bounce"
+                                  style={{ height: `${h}px`, animationDelay: `${i * 0.1}s` }}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <Icon name="Play" size={16} className="text-white ml-0.5" />
+                          )}
+                        </button>
+
+                        {/* Info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-semibold text-white truncate">{track.title}</span>
+                            {track.isNew && (
+                              <span className="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-full">NEW</span>
+                            )}
+                            {track.isHot && (
+                              <span className="text-xs bg-red-500/20 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                                <Icon name="Flame" size={10} />HOT
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-3 mt-0.5">
+                            <span className="text-zinc-400 text-sm truncate">{track.artist}</span>
+                            <span className="text-zinc-600 text-xs hidden sm:block">{track.genre}</span>
+                          </div>
                         </div>
-                      ) : (
-                        <Icon name="Music2" size={18} className="text-white/70" />
+
+                        {/* Duration */}
+                        <span className="text-zinc-500 text-xs flex-shrink-0 hidden md:block">
+                          {isPlaying ? `${formatTime(cur)} / ${formatTime(dur)}` : formatTime(dur)}
+                        </span>
+
+                        {/* Download */}
+                        <a
+                          href="https://t.me/dizymusic"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors flex-shrink-0"
+                          title="Скачать (нужна подписка)"
+                        >
+                          <Icon name="Download" size={14} className="text-zinc-400 group-hover:text-white transition-colors" />
+                        </a>
+                      </div>
+
+                      {/* Progress bar — показываем когда играет или есть прогресс */}
+                      {(isPlaying || cur > 0) && (
+                        <div
+                          className="w-full h-1.5 bg-white/10 rounded-full cursor-pointer ml-8"
+                          onClick={(e) => handleSeek(track.rank, track.src, e)}
+                        >
+                          <div
+                            className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
                       )}
                     </div>
-
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-semibold text-white truncate">{track.title}</span>
-                        {track.isNew && (
-                          <span className="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-full">NEW</span>
-                        )}
-                        {track.isHot && (
-                          <span className="text-xs bg-red-500/20 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-1">
-                            <Icon name="Flame" size={10} />HOT
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-3 mt-0.5">
-                        <span className="text-zinc-400 text-sm truncate">{track.artist}</span>
-                        <span className="text-zinc-600 text-xs">{track.genre}</span>
-                      </div>
-                    </div>
-
-                    {/* Plays */}
-                    <div className="hidden sm:flex items-center gap-1 text-zinc-500 text-sm">
-                      <Icon name="Play" size={12} />
-                      <span>{track.plays}</span>
-                    </div>
-
-                    {/* Duration */}
-                    <span className="text-zinc-500 text-sm hidden md:block w-10 text-right">{track.duration}</span>
-
-                    {/* Actions */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      <button
-                        onClick={() => setPlaying(playing === track.rank ? null : track.rank)}
-                        className="w-9 h-9 rounded-full bg-white/10 hover:bg-purple-600 flex items-center justify-center transition-colors"
-                      >
-                        <Icon name={playing === track.rank ? "Pause" : "Play"} size={15} className="text-white" />
-                      </button>
-                      <a
-                        href="https://t.me/dizymusic"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors"
-                        title="Скачать (нужна подписка)"
-                      >
-                        <Icon name="Download" size={15} className="text-zinc-400 group-hover:text-white transition-colors" />
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="mt-6 text-center">
@@ -373,7 +440,6 @@ export default function Trending() {
                 </h2>
                 <p className="text-zinc-400 max-w-xl mx-auto">За 500 ₽ в месяц — полный доступ ко всем трендам DIZY MUSIC</p>
               </div>
-
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {benefits.map((b, idx) => (
                   <div
@@ -407,11 +473,7 @@ export default function Trending() {
                       className="w-full flex items-center justify-between p-4 text-left"
                     >
                       <span className="font-medium text-white pr-4">{item.q}</span>
-                      <Icon
-                        name={openFaq === idx ? "ChevronUp" : "ChevronDown"}
-                        size={16}
-                        className="text-zinc-400 flex-shrink-0"
-                      />
+                      <Icon name={openFaq === idx ? "ChevronUp" : "ChevronDown"} size={16} className="text-zinc-400 flex-shrink-0" />
                     </button>
                     {openFaq === idx && (
                       <div className="px-4 pb-4 text-zinc-400 text-sm leading-relaxed border-t border-white/5 pt-3">
