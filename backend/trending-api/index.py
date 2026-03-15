@@ -58,11 +58,6 @@ def handler(event: dict, context) -> dict:
 
     body = json.loads(event.get("body") or "{}")
 
-    # Проверка пароля для всех изменяющих операций
-    admin_password = os.environ.get("ADMIN_PASSWORD", "")
-    if body.get("password") != admin_password:
-        return resp(403, {"error": "Неверный пароль"})
-
     # POST /add — добавить трек вручную
     if method == "POST" and path.endswith("/add"):
         conn = get_conn()
