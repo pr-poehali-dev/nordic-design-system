@@ -249,7 +249,7 @@ export default function Trending() {
               <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
                 <iframe
                   width="100%"
-                  height="450"
+                  height="200"
                   scrolling="no"
                   frameBorder="0"
                   src="https://mixupload.com/track/mla-screams-in-the-night-dmc-cox-radio-edit-8890518/embed"
