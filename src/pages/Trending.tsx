@@ -70,10 +70,10 @@ export default function Trending() {
   const [activePlayer, setActivePlayer] = useState<number | null>(null);
 
   const players = [
-    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed", title: "Gansta Rave", artist: "Regina Peppy", label: "🏆 ТОП 1", gradient: "from-purple-600 via-pink-600 to-rose-500", glow: "shadow-purple-500/30" },
-    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed", title: "I Want You", artist: "Ksenia Ray", label: "🥈 ТОП 2", gradient: "from-sky-500 via-blue-600 to-indigo-600", glow: "shadow-blue-500/30" },
-    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed", title: "Get Down", artist: "Dron", label: "🥉 ТОП 3", gradient: "from-emerald-500 via-teal-600 to-cyan-600", glow: "shadow-emerald-500/30" },
-    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed", title: "Gansta Mashine", artist: "Regina Peppy", label: "4️⃣ ТОП 4", gradient: "from-orange-500 via-amber-500 to-yellow-500", glow: "shadow-orange-500/30" },
+    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed", title: "Gansta Rave", artist: "Regina Peppy", label: "ТОП 1", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/4803e914-1dd5-4777-98f0-d903c46ec7cb.jpg" },
+    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed", title: "I Want You", artist: "Ksenia Ray", label: "ТОП 2", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/bb48388e-183d-4dd0-9db6-87697234ded9.jpg" },
+    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed", title: "Get Down", artist: "Dron", label: "ТОП 3", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/0aac0d99-9e6d-4484-aba6-4bf9d4ad4870.jpg" },
+    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed", title: "Gansta Mashine", artist: "Regina Peppy", label: "ТОП 4", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/8dba94a9-5356-4135-9399-3dc888b8bc93.jpg" },
   ];
 
   useEffect(() => {
@@ -170,60 +170,79 @@ export default function Trending() {
 
           {/* ПЛЕЕРЫ */}
           <section className="py-8 md:py-12">
-            <div className="container mx-auto px-4 space-y-3">
-              {players.map((p, idx) => {
-                const isActive = activePlayer === p.id;
-                return (
-                  <div
-                    key={p.id}
-                    className={`relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/80 backdrop-blur-md shadow-xl ${p.glow} transition-all duration-300 ${isActive ? "shadow-2xl scale-[1.01]" : "hover:scale-[1.005]"}`}
-                  >
-                    {/* Gradient accent line top */}
-                    <div className={`h-0.5 w-full bg-gradient-to-r ${p.gradient}`} />
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {players.map((p, idx) => {
+                  const isActive = activePlayer === p.id;
+                  const medals = ["🏆", "🥈", "🥉", "4️⃣"];
+                  return (
+                    <div key={p.id} className={`group relative rounded-2xl overflow-hidden bg-zinc-900 border transition-all duration-300 ${isActive ? "border-white/30 shadow-2xl shadow-white/10 scale-[1.02]" : "border-white/8 hover:border-white/20 hover:scale-[1.01]"}`}>
 
-                    <div className="flex items-center gap-4 px-4 py-3">
-                      {/* Rank circle */}
-                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${p.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
-                        <span className="text-lg leading-none">{p.label.split(" ")[0]}</span>
+                      {/* Обложка */}
+                      <div className="relative aspect-square overflow-hidden">
+                        <img
+                          src={p.cover}
+                          alt={p.title}
+                          className={`w-full h-full object-cover transition-transform duration-500 ${isActive ? "scale-110" : "group-hover:scale-105"}`}
+                        />
+                        {/* Overlay */}
+                        <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${isActive ? "opacity-60" : "opacity-0 group-hover:opacity-40"}`} />
+
+                        {/* Rank badge */}
+                        <div className="absolute top-2 left-2 bg-black/70 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1">
+                          <span className="text-xs">{medals[idx]}</span>
+                          <span className="text-white text-xs font-bold">{p.label}</span>
+                        </div>
+
+                        {/* Equalizer when active */}
+                        {isActive && (
+                          <div className="absolute bottom-3 right-3 flex gap-0.5 items-end h-5">
+                            {[10, 16, 8, 14, 6].map((h, i) => (
+                              <span key={i} className="w-1 bg-white rounded-sm animate-bounce"
+                                style={{ height: `${h}px`, animationDelay: `${i * 0.1}s` }} />
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Play button overlay */}
+                        {!isActive && (
+                          <button
+                            onClick={() => setActivePlayer(p.id)}
+                            className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                          >
+                            <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center hover:bg-white/30 transition-colors">
+                              <Icon name="Play" size={22} className="text-white ml-1" />
+                            </div>
+                          </button>
+                        )}
                       </div>
 
-                      {/* Track info */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className={`text-xs font-bold bg-gradient-to-r ${p.gradient} bg-clip-text text-transparent`}>{p.label.split(" ").slice(1).join(" ")}</span>
-                          {idx === 0 && <span className="flex items-center gap-1 text-xs text-red-400"><span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse inline-block" />LIVE</span>}
-                        </div>
-                        <p className="text-white font-semibold text-sm truncate">{p.title}</p>
-                        <p className="text-zinc-500 text-xs truncate">{p.artist}</p>
-                      </div>
+                      {/* Info + iframe */}
+                      <div className="p-3">
+                        <p className="text-white font-semibold text-sm truncate leading-tight">{p.title}</p>
+                        <p className="text-zinc-400 text-xs truncate mt-0.5">{p.artist}</p>
 
-                      {/* Play/active indicator */}
-                      {!isActive && (
-                        <button
-                          onClick={() => setActivePlayer(p.id)}
-                          className={`w-10 h-10 rounded-full bg-gradient-to-br ${p.gradient} flex items-center justify-center shadow-lg hover:scale-110 transition-transform flex-shrink-0`}
-                        >
-                          <Icon name="Play" size={16} className="text-white ml-0.5" />
-                        </button>
-                      )}
-                      {isActive && (
-                        <div className="flex gap-0.5 items-end h-5 flex-shrink-0 px-2">
-                          {[12, 18, 10, 16, 8].map((h, i) => (
-                            <span key={i} className={`w-1 rounded-sm bg-gradient-to-t ${p.gradient} animate-bounce`}
-                              style={{ height: `${h}px`, animationDelay: `${i * 0.12}s` }} />
-                          ))}
-                        </div>
-                      )}
+                        {!isActive && (
+                          <button
+                            onClick={() => setActivePlayer(p.id)}
+                            className="mt-3 w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-white/8 hover:bg-white/15 border border-white/10 transition-colors text-xs text-zinc-300"
+                          >
+                            <Icon name="Play" size={12} className="text-white" />
+                            Слушать
+                          </button>
+                        )}
+
+                        {isActive && (
+                          <div className="mt-2 -mx-3 -mb-3">
+                            <iframe key={`active-${p.id}`} width="100%" height="120" scrolling="no" frameBorder="0"
+                              src={p.src} className="block rounded-b-2xl" allow="autoplay" />
+                          </div>
+                        )}
+                      </div>
                     </div>
-
-                    {/* iframe — только когда активен */}
-                    {isActive && (
-                      <iframe key={`active-${p.id}`} width="100%" height="120" scrolling="no" frameBorder="0"
-                        src={p.src} className="block" allow="autoplay" />
-                    )}
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </section>
 
