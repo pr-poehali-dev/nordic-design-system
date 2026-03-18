@@ -70,10 +70,10 @@ export default function Trending() {
   const [activePlayer, setActivePlayer] = useState<number | null>(null);
 
   const players = [
-    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed" },
-    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed" },
-    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed" },
-    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed" },
+    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed", title: "Gansta Rave", artist: "Regina Peppy", label: "🏆 ТОП 1", gradient: "from-purple-600 via-pink-600 to-rose-500", glow: "shadow-purple-500/30" },
+    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed", title: "I Want You", artist: "Ksenia Ray", label: "🥈 ТОП 2", gradient: "from-sky-500 via-blue-600 to-indigo-600", glow: "shadow-blue-500/30" },
+    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed", title: "Get Down", artist: "Dron", label: "🥉 ТОП 3", gradient: "from-emerald-500 via-teal-600 to-cyan-600", glow: "shadow-emerald-500/30" },
+    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed", title: "Gansta Mashine", artist: "Regina Peppy", label: "4️⃣ ТОП 4", gradient: "from-orange-500 via-amber-500 to-yellow-500", glow: "shadow-orange-500/30" },
   ];
 
   useEffect(() => {
@@ -170,32 +170,56 @@ export default function Trending() {
 
           {/* ПЛЕЕРЫ */}
           <section className="py-8 md:py-12">
-            <div className="container mx-auto px-4 space-y-4">
+            <div className="container mx-auto px-4 space-y-3">
               {players.map((p, idx) => {
-                const labels = ["🏆 ТОП 1 В ТРЕНДЕ", "🥈 ТОП 2", "🥉 ТОП 3", "4️⃣ ТОП 4"];
-                const isFirst = idx === 0;
                 const isActive = activePlayer === p.id;
                 return (
-                  <div key={p.id} className={`rounded-2xl backdrop-blur-md overflow-hidden border ${isFirst ? "border-purple-500/40" : "border-white/10"} bg-zinc-900/60`}>
-                    <div className={`flex items-center gap-2 px-4 py-2.5 border-b border-white/8 ${isFirst ? "bg-gradient-to-r from-purple-600/20 to-pink-600/20" : "bg-white/5"}`}>
-                      <span className={`flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1 rounded-full ${isFirst ? "bg-gradient-to-r from-purple-500 to-pink-500" : "bg-zinc-700"}`}>
-                        {labels[idx]}
-                      </span>
-                      {isFirst && <><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /><span className="text-red-400 text-xs font-medium">Сейчас играет</span></>}
+                  <div
+                    key={p.id}
+                    className={`relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/80 backdrop-blur-md shadow-xl ${p.glow} transition-all duration-300 ${isActive ? "shadow-2xl scale-[1.01]" : "hover:scale-[1.005]"}`}
+                  >
+                    {/* Gradient accent line top */}
+                    <div className={`h-0.5 w-full bg-gradient-to-r ${p.gradient}`} />
+
+                    <div className="flex items-center gap-4 px-4 py-3">
+                      {/* Rank circle */}
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${p.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                        <span className="text-lg leading-none">{p.label.split(" ")[0]}</span>
+                      </div>
+
+                      {/* Track info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-xs font-bold bg-gradient-to-r ${p.gradient} bg-clip-text text-transparent`}>{p.label.split(" ").slice(1).join(" ")}</span>
+                          {idx === 0 && <span className="flex items-center gap-1 text-xs text-red-400"><span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse inline-block" />LIVE</span>}
+                        </div>
+                        <p className="text-white font-semibold text-sm truncate">{p.title}</p>
+                        <p className="text-zinc-500 text-xs truncate">{p.artist}</p>
+                      </div>
+
+                      {/* Play/active indicator */}
+                      {!isActive && (
+                        <button
+                          onClick={() => setActivePlayer(p.id)}
+                          className={`w-10 h-10 rounded-full bg-gradient-to-br ${p.gradient} flex items-center justify-center shadow-lg hover:scale-110 transition-transform flex-shrink-0`}
+                        >
+                          <Icon name="Play" size={16} className="text-white ml-0.5" />
+                        </button>
+                      )}
+                      {isActive && (
+                        <div className="flex gap-0.5 items-end h-5 flex-shrink-0 px-2">
+                          {[12, 18, 10, 16, 8].map((h, i) => (
+                            <span key={i} className={`w-1 rounded-sm bg-gradient-to-t ${p.gradient} animate-bounce`}
+                              style={{ height: `${h}px`, animationDelay: `${i * 0.12}s` }} />
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    {isActive ? (
+
+                    {/* iframe — только когда активен */}
+                    {isActive && (
                       <iframe key={`active-${p.id}`} width="100%" height="120" scrolling="no" frameBorder="0"
                         src={p.src} className="block" allow="autoplay" />
-                    ) : (
-                      <div
-                        className="h-[120px] flex items-center justify-center cursor-pointer hover:bg-white/5 transition-colors gap-3"
-                        onClick={() => setActivePlayer(p.id)}
-                      >
-                        <div className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-                          <Icon name="Play" size={18} className="text-white ml-0.5" />
-                        </div>
-                        <span className="text-zinc-400 text-sm">Нажми для воспроизведения</span>
-                      </div>
                     )}
                   </div>
                 );
