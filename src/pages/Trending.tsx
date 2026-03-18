@@ -243,6 +243,24 @@ export default function Trending() {
             </div>
           </section>
 
+          {/* ПЛЕЕР */}
+          <section className="py-8 md:py-12">
+            <div className="container mx-auto px-4">
+              <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
+                <iframe
+                  width="100%"
+                  height="450"
+                  scrolling="no"
+                  frameBorder="0"
+                  src="https://mixupload.com/track/mla-screams-in-the-night-dmc-cox-radio-edit-8890518/embed"
+                  className="block"
+                  title="MLA — Screams In The Night (DMC Cox Radio Edit)"
+                  allow="autoplay"
+                />
+              </div>
+            </div>
+          </section>
+
           {/* ТРЕКИ */}
           <section
             ref={tracksSection.ref as React.RefObject<HTMLElement>}
