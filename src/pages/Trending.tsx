@@ -144,7 +144,7 @@ export default function Trending() {
                   </div>
                   <div className="flex flex-wrap gap-6 mt-8 pt-6 border-t border-white/10">
                     {[
-                      { label: "Треков в топе", value: String(trending.length || 8) },
+                      { label: "Треков в топе", value: "4" },
                       { label: "Слушателей в месяц", value: "18K+" },
                       { label: "Обновление", value: "Еженедельно" },
                       { label: "Качество", value: "WAV + MP3" },
