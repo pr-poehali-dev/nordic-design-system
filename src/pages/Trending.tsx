@@ -70,10 +70,10 @@ export default function Trending() {
   const [activePlayer, setActivePlayer] = useState<number | null>(null);
 
   const players = [
-    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed", title: "Gansta Rave", artist: "Regina Peppy", label: "ТОП 1", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/4803e914-1dd5-4777-98f0-d903c46ec7cb.jpg" },
-    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed", title: "I Want You", artist: "Ksenia Ray", label: "ТОП 2", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/bb48388e-183d-4dd0-9db6-87697234ded9.jpg" },
-    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed", title: "Get Down", artist: "Dron", label: "ТОП 3", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/0aac0d99-9e6d-4484-aba6-4bf9d4ad4870.jpg" },
-    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed", title: "Gansta Mashine", artist: "Regina Peppy", label: "ТОП 4", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/files/8dba94a9-5356-4135-9399-3dc888b8bc93.jpg" },
+    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed", title: "Gansta Rave", artist: "Regina Peppy", label: "ТОП 1", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/a91de633-d14a-4051-90f4-585aee7a187d.jpg" },
+    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed", title: "I Want You", artist: "Ksenia Ray", label: "ТОП 2", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/6715b747-30aa-453d-8a92-5f7c5a8a096e.jpg" },
+    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed", title: "Get Down", artist: "Dron", label: "ТОП 3", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/a91de633-d14a-4051-90f4-585aee7a187d.jpg" },
+    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed", title: "Gansta Mashine", artist: "Regina Peppy", label: "ТОП 4", cover: "https://cdn.poehali.dev/projects/66629166-5fbb-46c8-a38a-99027997e13f/bucket/a91de633-d14a-4051-90f4-585aee7a187d.jpg" },
   ];
 
   useEffect(() => {
