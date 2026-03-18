@@ -67,6 +67,14 @@ export default function Trending() {
   const ctaSection = useVisible(0.1);
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activePlayer, setActivePlayer] = useState<number | null>(null);
+
+  const players = [
+    { id: 1, src: "https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed" },
+    { id: 2, src: "https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed" },
+    { id: 3, src: "https://mixupload.com/track/dron-get-down-original-mix-8939597/embed" },
+    { id: 4, src: "https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed" },
+  ];
 
   useEffect(() => {
     document.title = "Сейчас в тренде — DIZY MUSIC | Топ ремиксов недели";
@@ -163,57 +171,35 @@ export default function Trending() {
           {/* ПЛЕЕРЫ */}
           <section className="py-8 md:py-12">
             <div className="container mx-auto px-4 space-y-4">
-
-              {/* ТОП 1 */}
-              <div className="rounded-2xl border border-purple-500/40 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-white/8">
-                  <span className="flex items-center gap-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    🏆 ТОП 1 В ТРЕНДЕ
-                  </span>
-                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-red-400 text-xs font-medium">Сейчас играет</span>
-                </div>
-                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
-                  src="https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed"
-                  className="block" allow="autoplay" />
-              </div>
-
-              {/* ТОП 2 */}
-              <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border-b border-white/8">
-                  <span className="flex items-center gap-1.5 bg-zinc-700 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    🥈 ТОП 2
-                  </span>
-                </div>
-                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
-                  src="https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed"
-                  className="block" allow="autoplay" />
-              </div>
-
-              {/* ТОП 3 */}
-              <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border-b border-white/8">
-                  <span className="flex items-center gap-1.5 bg-zinc-700 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    🥉 ТОП 3
-                  </span>
-                </div>
-                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
-                  src="https://mixupload.com/track/dron-get-down-original-mix-8939597/embed"
-                  className="block" allow="autoplay" />
-              </div>
-
-              {/* ТОП 4 */}
-              <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border-b border-white/8">
-                  <span className="flex items-center gap-1.5 bg-zinc-700 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    4️⃣ ТОП 4
-                  </span>
-                </div>
-                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
-                  src="https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed"
-                  className="block" allow="autoplay" />
-              </div>
-
+              {players.map((p, idx) => {
+                const labels = ["🏆 ТОП 1 В ТРЕНДЕ", "🥈 ТОП 2", "🥉 ТОП 3", "4️⃣ ТОП 4"];
+                const isFirst = idx === 0;
+                const isActive = activePlayer === p.id;
+                return (
+                  <div key={p.id} className={`rounded-2xl backdrop-blur-md overflow-hidden border ${isFirst ? "border-purple-500/40" : "border-white/10"} bg-zinc-900/60`}>
+                    <div className={`flex items-center gap-2 px-4 py-2.5 border-b border-white/8 ${isFirst ? "bg-gradient-to-r from-purple-600/20 to-pink-600/20" : "bg-white/5"}`}>
+                      <span className={`flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1 rounded-full ${isFirst ? "bg-gradient-to-r from-purple-500 to-pink-500" : "bg-zinc-700"}`}>
+                        {labels[idx]}
+                      </span>
+                      {isFirst && <><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /><span className="text-red-400 text-xs font-medium">Сейчас играет</span></>}
+                    </div>
+                    {isActive ? (
+                      <iframe key={`active-${p.id}`} width="100%" height="120" scrolling="no" frameBorder="0"
+                        src={p.src} className="block" allow="autoplay" />
+                    ) : (
+                      <div
+                        className="h-[120px] flex items-center justify-center cursor-pointer hover:bg-white/5 transition-colors gap-3"
+                        onClick={() => setActivePlayer(p.id)}
+                      >
+                        <div className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                          <Icon name="Play" size={18} className="text-white ml-0.5" />
+                        </div>
+                        <span className="text-zinc-400 text-sm">Нажми для воспроизведения</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </section>
 
