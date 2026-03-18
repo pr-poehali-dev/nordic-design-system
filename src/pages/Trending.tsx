@@ -59,6 +59,7 @@ const faqs = [
   },
 ];
 
+// v2
 export default function Trending() {
   const hero = useVisible(0.1);
   const benefitsSection = useVisible(0.1);
