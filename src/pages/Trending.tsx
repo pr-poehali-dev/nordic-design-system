@@ -246,7 +246,14 @@ export default function Trending() {
           {/* ПЛЕЕР */}
           <section className="py-8 md:py-12">
             <div className="container mx-auto px-4">
-              <div className="rounded-2xl border border-white/10 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
+              <div className="rounded-2xl border border-purple-500/40 bg-zinc-900/60 backdrop-blur-md overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-white/8">
+                  <span className="flex items-center gap-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    🏆 ТОП 1 В ТРЕНДЕ
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  <span className="text-red-400 text-xs font-medium">Сейчас играет</span>
+                </div>
                 <iframe
                   width="100%"
                   height="200"
