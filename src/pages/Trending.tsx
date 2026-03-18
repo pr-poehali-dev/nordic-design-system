@@ -173,7 +173,7 @@ export default function Trending() {
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                   <span className="text-red-400 text-xs font-medium">Сейчас играет</span>
                 </div>
-                <iframe width="100%" height="200" scrolling="no" frameBorder="0"
+                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
                   src="https://mixupload.com/track/regina-peppy-gansta-rave-radio-edit-8939595/embed"
                   className="block" allow="autoplay" />
               </div>
@@ -185,7 +185,7 @@ export default function Trending() {
                     🥈 ТОП 2
                   </span>
                 </div>
-                <iframe width="100%" height="200" scrolling="no" frameBorder="0"
+                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
                   src="https://mixupload.com/track/ksenia-ray-i-want-you-radio-edit-8939599/embed"
                   className="block" allow="autoplay" />
               </div>
@@ -197,7 +197,7 @@ export default function Trending() {
                     🥉 ТОП 3
                   </span>
                 </div>
-                <iframe width="100%" height="200" scrolling="no" frameBorder="0"
+                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
                   src="https://mixupload.com/track/dron-get-down-original-mix-8939597/embed"
                   className="block" allow="autoplay" />
               </div>
@@ -209,7 +209,7 @@ export default function Trending() {
                     4️⃣ ТОП 4
                   </span>
                 </div>
-                <iframe width="100%" height="200" scrolling="no" frameBorder="0"
+                <iframe width="100%" height="120" scrolling="no" frameBorder="0"
                   src="https://mixupload.com/track/regina-peppy-gansta-mashine-radio-edit-8939594/embed"
                   className="block" allow="autoplay" />
               </div>
