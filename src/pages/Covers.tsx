@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
+import SEO from "@/components/SEO";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLElement>(null);
@@ -86,19 +87,6 @@ const requirements = [
 ];
 
 const Covers = () => {
-  useEffect(() => {
-    document.title = "Обложки для релизов на заказ — DIZY MUSIC";
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "Авторские обложки для релизов от DIZY MUSIC. Соответствуют правилам Spotify, Apple Music, ВКонтакте и других площадок. Синглы, EP, альбомы. Цены от 2 500 ₽.");
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute("href", "https://dizymusic.ru/covers");
-    return () => {
-      document.title = "DIZY MUSIC — Музыкальный лейбл | Дистрибуция, Ghost Production, Питчинг";
-      if (desc) desc.setAttribute("content", "DIZY MUSIC — музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на 50+ платформ, ghost production, питчинг в топ-плейлисты, сведение и мастеринг. 100% роялти.");
-      if (canonical) canonical.setAttribute("href", "https://dizymusic.ru");
-    };
-  }, []);
-
   const hero = useVisible(0.1);
   const portfolio = useVisible(0.1);
   const packages = useVisible(0.1);
@@ -108,6 +96,11 @@ const Covers = () => {
 
   return (
     <div className="min-h-screen text-white relative bg-black">
+      <SEO
+        title="Кавер-версии песен"
+        description="Профессиональные кавер-версии на заказ от DIZY MUSIC. Оригинальная аранжировка, студийная запись, любые жанры."
+        canonical="/covers"
+      />
       <InteractiveBackground />
       <div className="relative z-10">
         <Header />

@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
+import SEO from "@/components/SEO";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLElement>(null);
@@ -112,19 +113,6 @@ const steps = [
 ];
 
 const Promotion = () => {
-  useEffect(() => {
-    document.title = "Продвижение музыки — VK, Telegram, YouTube, Spotify, Яндекс — DIZY MUSIC";
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "Продвижение музыки от DIZY MUSIC: VK, Telegram, YouTube, Spotify и Яндекс Музыка. Специальные цены для артистов лейбла. Рост прослушиваний и аудитории.");
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute("href", "https://dizymusic.ru/promotion");
-    return () => {
-      document.title = "DIZY MUSIC — Музыкальный лейбл | Дистрибуция, Ghost Production, Питчинг";
-      if (desc) desc.setAttribute("content", "DIZY MUSIC — музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на 50+ платформ, ghost production, питчинг в топ-плейлисты, сведение и мастеринг. 100% роялти.");
-      if (canonical) canonical.setAttribute("href", "https://dizymusic.ru");
-    };
-  }, []);
-
   const hero = useVisible(0.1);
   const platformsSection = useVisible(0.1);
   const stepsSection = useVisible(0.1);

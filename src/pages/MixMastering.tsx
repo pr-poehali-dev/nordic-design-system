@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
+import SEO from "@/components/SEO";
 
 const steps = [
   {
@@ -71,19 +72,6 @@ function useVisible(threshold = 0.15) {
 }
 
 const MixMastering = () => {
-  useEffect(() => {
-    document.title = "Сведение и мастеринг треков — DIZY MUSIC";
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "Профессиональное сведение и мастеринг треков от DIZY MUSIC. Готовим музыку к релизу на всех платформах. Работаем в любых жанрах. Цены от 1 500 ₽.");
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute("href", "https://dizymusic.ru/mix-mastering");
-    return () => {
-      document.title = "DIZY MUSIC — Музыкальный лейбл | Дистрибуция, Ghost Production, Питчинг";
-      if (desc) desc.setAttribute("content", "DIZY MUSIC — музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на 50+ платформ, ghost production, питчинг в топ-плейлисты, сведение и мастеринг. 100% роялти.");
-      if (canonical) canonical.setAttribute("href", "https://dizymusic.ru");
-    };
-  }, []);
-
   const hero = useVisible(0.1);
   const services = useVisible(0.1);
   const process = useVisible(0.1);
@@ -91,6 +79,11 @@ const MixMastering = () => {
 
   return (
     <div className="min-h-screen text-white relative bg-black">
+      <SEO
+        title="Сведение и мастеринг треков"
+        description="Профессиональное сведение и мастеринг музыки от DIZY MUSIC. Студийное качество звука, быстрые сроки, правки до согласования."
+        canonical="/mix-mastering"
+      />
       <InteractiveBackground />
       <div className="relative z-10">
         <Header />

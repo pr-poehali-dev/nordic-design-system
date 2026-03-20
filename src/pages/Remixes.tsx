@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
+import SEO from "@/components/SEO";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLElement>(null);
@@ -71,19 +72,6 @@ const genres = [
 ];
 
 const Remixes = () => {
-  useEffect(() => {
-    document.title = "Написание ремиксов на заказ — DIZY MUSIC";
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "Профессиональное написание ремиксов на заказ от DIZY MUSIC. Официальные ремиксы, DJ-редакты, любые жанры. Сроки от 3 дней, цены от 3 000 ₽.");
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute("href", "https://dizymusic.ru/remixes");
-    return () => {
-      document.title = "DIZY MUSIC — Музыкальный лейбл | Дистрибуция, Ghost Production, Питчинг";
-      if (desc) desc.setAttribute("content", "DIZY MUSIC — музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на 50+ платформ, ghost production, питчинг в топ-плейлисты, сведение и мастеринг. 100% роялти.");
-      if (canonical) canonical.setAttribute("href", "https://dizymusic.ru");
-    };
-  }, []);
-
   const hero = useVisible(0.1);
   const services = useVisible(0.1);
   const process = useVisible(0.1);
@@ -91,6 +79,11 @@ const Remixes = () => {
 
   return (
     <div className="min-h-screen text-white relative bg-black">
+      <SEO
+        title="Ремиксы на заказ"
+        description="Создание ремиксов на заказ от DIZY MUSIC. Свежий взгляд на ваш трек, профессиональные продюсеры, любые жанры."
+        canonical="/remixes"
+      />
       <InteractiveBackground />
       <div className="relative z-10">
         <Header />

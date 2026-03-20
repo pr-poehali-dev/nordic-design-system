@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Header, Footer, InteractiveBackground } from "@/components/landing";
+import SEO from "@/components/SEO";
 
 function useVisible(threshold = 0.1) {
   const ref = useRef<HTMLElement>(null);
@@ -82,19 +83,6 @@ const genres = [
 ];
 
 const CustomTracks = () => {
-  useEffect(() => {
-    document.title = "Написание треков на заказ — DIZY MUSIC";
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", "Написание треков на заказ от DIZY MUSIC. Инструменталы, треки под ключ, джинглы и заставки. Любой жанр, профессиональное качество. Цены от 3 000 ₽.");
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute("href", "https://dizymusic.ru/custom-tracks");
-    return () => {
-      document.title = "DIZY MUSIC — Музыкальный лейбл | Дистрибуция, Ghost Production, Питчинг";
-      if (desc) desc.setAttribute("content", "DIZY MUSIC — музыкальный лейбл, который выводит артистов на новый уровень. Дистрибуция на 50+ платформ, ghost production, питчинг в топ-плейлисты, сведение и мастеринг. 100% роялти.");
-      if (canonical) canonical.setAttribute("href", "https://dizymusic.ru");
-    };
-  }, []);
-
   const hero = useVisible(0.1);
   const services = useVisible(0.1);
   const useCasesSection = useVisible(0.1);
@@ -103,6 +91,11 @@ const CustomTracks = () => {
 
   return (
     <div className="min-h-screen text-white relative bg-black">
+      <SEO
+        title="Треки на заказ"
+        description="Заказать авторский трек у DIZY MUSIC. Пишем музыку под ваш проект, бренд или мероприятие — любой жанр и настроение."
+        canonical="/custom-tracks"
+      />
       <InteractiveBackground />
       <div className="relative z-10">
         <Header />
