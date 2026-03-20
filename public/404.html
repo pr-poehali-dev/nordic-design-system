@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Страница не найдена</title>
+  <script>
+    // Redirect to SPA with the 404 path encoded
+    sessionStorage.setItem('redirect', location.pathname + location.search);
+    location.replace('/');
+  </script>
+</head>
+<body>
+  <p>Страница не найдена. <a href="/">Вернуться на главную</a></p>
+</body>
+</html>
